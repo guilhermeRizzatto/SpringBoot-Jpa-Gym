@@ -14,8 +14,8 @@ public class GymMembershipService {
 	@Autowired
 	private GymMembershipRepository membershipRepository;
 	
-	public void insert (GymMembership member) {
-		membershipRepository.save(member);
+	public GymMembership insert (GymMembership member) {
+		return membershipRepository.save(member);
 	}
 	
 	public GymMembership findById(Long id) {	

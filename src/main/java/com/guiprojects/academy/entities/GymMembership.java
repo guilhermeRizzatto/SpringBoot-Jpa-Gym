@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.guiprojects.academy.projections.GymMembershipProjection;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -44,6 +45,17 @@ public class GymMembership implements Serializable{
 		this.weight = weight;
 		this.height = height;
 		this.registration = registration;
+	}
+	
+	public GymMembership(GymMembershipProjection projection) {
+		this.id = projection.getId();
+		this.name = projection.getName();
+		this.cpf = projection.getCpf();
+		this.phone = projection.getPhone();
+		this.age = projection.getAge();
+		this.weight = projection.getWeight();
+		this.height = projection.getHeight();
+		this.registration = projection.getRegistration();
 	}
 
 	public Long getId() {
@@ -109,6 +121,7 @@ public class GymMembership implements Serializable{
 	public void setRegistration(Registration registration) {
 		this.registration = registration;
 	}
+	
 
 	@Override
 	public int hashCode() {

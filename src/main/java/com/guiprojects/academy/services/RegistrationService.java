@@ -5,7 +5,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.guiprojects.academy.entities.GymMembership;
 import com.guiprojects.academy.entities.Registration;
 import com.guiprojects.academy.repositories.GymMembershipRepository;
 import com.guiprojects.academy.repositories.RegistrationRepository;
@@ -25,12 +24,11 @@ public class RegistrationService {
 	}
 	
 	public Registration insert (Registration registration) {
-		Registration obj = registrationRepository.save(registration);
-		GymMembership member = registration.getGymMembership();
-		member.setRegistration(obj);
-		memberRepository.save(member);
+		Registration obj = registrationRepository.save(registration);	
+		memberRepository.updateRegistration(obj.getId(), registration.getGymMembership().getId());
 		return obj;	
 	}
+	
 	
 	
 

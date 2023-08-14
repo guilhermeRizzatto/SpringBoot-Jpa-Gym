@@ -22,14 +22,14 @@ public class GymMembershipController {
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<GymMembership> findById(@PathVariable Long id){
-		GymMembership member = membershipService.findById(id);
-		return ResponseEntity.ok().body(member);
+		GymMembership obj = membershipService.findById(id);
+		return ResponseEntity.ok().body(obj);
 	}
 	
 	@PostMapping
 	public ResponseEntity<GymMembership> insert(@RequestBody GymMembership member){
-		membershipService.insert(member);
-		return ResponseEntity.status(HttpStatus.CREATED).build();
+		GymMembership obj = membershipService.insert(member);
+		return ResponseEntity.status(HttpStatus.CREATED).body(obj);
 	}
 	
 }
