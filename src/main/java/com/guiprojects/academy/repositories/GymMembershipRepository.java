@@ -17,6 +17,6 @@ public interface GymMembershipRepository extends JpaRepository<GymMembership, Lo
 			SET registration_id = :registrationId 
 			WHERE id = :memberId
 			""")
-	public GymMembership updateRegistration(Long registrationId, Long memberId);
+	public void updateRegistration(Long registrationId, Long memberId);
 	
 }

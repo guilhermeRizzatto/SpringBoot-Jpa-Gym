@@ -25,7 +25,7 @@ public class RegistrationService {
 	
 	public Registration insert (Registration registration) {
 		Registration obj = registrationRepository.save(registration);	
-		memberRepository.updateRegistration(obj.getId(), registration.getGymMembership().getId());
+		memberRepository.updateRegistration(registration.getGymMembership().getId(), obj.getId());
 		return obj;	
 	}
 	

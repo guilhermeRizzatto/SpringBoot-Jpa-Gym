@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.guiprojects.academy.dto.request.GymMembershipDTORequest;
+import com.guiprojects.academy.dto.response.GymMembershipDTOResponse;
 import com.guiprojects.academy.entities.GymMembership;
 import com.guiprojects.academy.services.GymMembershipService;
 
@@ -21,15 +23,16 @@ public class GymMembershipController {
 	private GymMembershipService membershipService;
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<GymMembership> findById(@PathVariable Long id){
-		GymMembership obj = membershipService.findById(id);
+	public ResponseEntity<GymMembershipDTOResponse> findById(@PathVariable Long id){
+		GymMembershipDTOResponse obj = new GymMembershipDTOResponse(membershipService.findById(id));
 		return ResponseEntity.ok().body(obj);
 	}
 	
 	@PostMapping
-	public ResponseEntity<GymMembership> insert(@RequestBody GymMembership member){
-		GymMembership obj = membershipService.insert(member);
-		return ResponseEntity.status(HttpStatus.CREATED).body(obj);
+	public ResponseEntity<GymMembershipDTOResponse> insert(@RequestBody GymMembershipDTORequest request){
+		GymMembership obj = new GymMembership(request);		
+		GymMembershipDTOResponse response = new GymMembershipDTOResponse(membershipService.insert(obj));
+		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	}
 	
 }

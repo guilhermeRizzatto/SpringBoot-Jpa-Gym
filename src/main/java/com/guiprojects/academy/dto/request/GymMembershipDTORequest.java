@@ -1,25 +1,10 @@
-package com.guiprojects.academy.entities;
+package com.guiprojects.academy.dto.request;
 
-import java.io.Serializable;
 import java.util.Objects;
 
-import com.guiprojects.academy.dto.request.GymMembershipDTORequest;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-
-@Entity
-public class GymMembership implements Serializable{
-	private static final long serialVersionUID = 1L;
+public class GymMembershipDTORequest {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
 	private String name;
 	private String cpf;
 	private String phone;
@@ -27,14 +12,10 @@ public class GymMembership implements Serializable{
 	private Double weight;
 	private Double height;
 	
-	@OneToOne
-	@JoinColumn(name="registration_id")
-	private Registration registration;
-	
-	public GymMembership() {
+	public GymMembershipDTORequest() {
 	}
 
-	public GymMembership(Long id, String name, String cpf, String phone, Integer age, Double weight, Double height) {
+	public GymMembershipDTORequest(Long id, String name, String cpf, String phone, Integer age, Double weight,Double height) {
 		this.id = id;
 		this.name = name;
 		this.cpf = cpf;
@@ -43,17 +24,7 @@ public class GymMembership implements Serializable{
 		this.weight = weight;
 		this.height = height;
 	}
-	
-	public GymMembership(GymMembershipDTORequest request) {
-		this.id = request.getId();
-		this.name = request.getName();
-		this.cpf = request.getCpf();
-		this.phone = request.getPhone();
-		this.age = request.getAge();
-		this.weight = request.getWeight();
-		this.height = request.getHeight();
-	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -109,15 +80,6 @@ public class GymMembership implements Serializable{
 	public void setHeight(Double height) {
 		this.height = height;
 	}
-	
-	public Registration getRegistration() {
-		return registration;
-	}
-
-	public void setRegistration(Registration registration) {
-		this.registration = registration;
-	}
-	
 
 	@Override
 	public int hashCode() {
@@ -132,9 +94,11 @@ public class GymMembership implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		GymMembership other = (GymMembership) obj;
+		GymMembershipDTORequest other = (GymMembershipDTORequest) obj;
 		return Objects.equals(id, other.id);
 	}
+	
+	
 	
 	
 
