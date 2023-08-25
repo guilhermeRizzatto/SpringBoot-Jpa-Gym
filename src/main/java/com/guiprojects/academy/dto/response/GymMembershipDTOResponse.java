@@ -15,7 +15,6 @@ public class GymMembershipDTOResponse {
 	private Double weight;
 	private Double height;
 	
-	
 	public GymMembershipDTOResponse() {
 	}
 	
