@@ -1,42 +1,25 @@
-package com.guiprojects.academy.entities;
+package com.guiprojects.academy.dto.request;
 
-import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
-import com.guiprojects.academy.dto.request.RegistrationDTORequest;
+import com.guiprojects.academy.entities.GymMembership;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 
-@Entity
-public class Registration implements Serializable{
-
-	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+public class RegistrationDTORequest {
 	
+	private Long id;
 	private Instant registrationDate;
 	private Integer monthlyPeriod;
 	private Double price;
 	private Integer installment;
 	private Boolean valid;
-	
-	@OneToOne
-	@JoinColumn(name="gymMembership_id")
 	private GymMembership gymMembership;
 	
-	public Registration() {
+	public RegistrationDTORequest() {
 	}
-
-	public Registration(Long id, Instant registrationDate, Integer monthlyPeriod, Double price, Integer installment, Boolean valid, GymMembership gymMembership) {
-		super();
+	
+	public RegistrationDTORequest(Long id, Instant registrationDate, Integer monthlyPeriod, Double price,Integer installment, Boolean valid, GymMembership gymMembership) {
 		this.id = id;
 		this.registrationDate = registrationDate;
 		this.monthlyPeriod = monthlyPeriod;
@@ -44,16 +27,6 @@ public class Registration implements Serializable{
 		this.installment = installment;
 		this.valid = valid;
 		this.gymMembership = gymMembership;
-	}
-	
-	public Registration(RegistrationDTORequest request) {
-		this.id = request.getId();
-		this.registrationDate = request.getRegistrationDate();
-		this.monthlyPeriod = request.getMonthlyPeriod();
-		this.price = request.getPrice();
-		this.installment = request.getInstallment();
-		this.valid = request.getValid();
-		this.gymMembership = request.getGymMembership();
 	}
 
 	public Long getId() {
@@ -101,9 +74,9 @@ public class Registration implements Serializable{
 	}
 
 	public void setValid(Boolean valid) {
-		this.valid = valid;		
+		this.valid = valid;
 	}
-	
+
 	public GymMembership getGymMembership() {
 		return gymMembership;
 	}
@@ -125,11 +98,10 @@ public class Registration implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Registration other = (Registration) obj;
+		RegistrationDTORequest other = (RegistrationDTORequest) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
-	
 
+	
+	
 }

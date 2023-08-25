@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.guiprojects.academy.dto.request.RegistrationDTORequest;
+import com.guiprojects.academy.dto.response.RegistrationDTOResponse;
 import com.guiprojects.academy.entities.Registration;
 import com.guiprojects.academy.services.RegistrationService;
 
@@ -21,14 +23,15 @@ public class RegistrationController {
 	private RegistrationService registrationService;
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Registration> findById(@PathVariable Long id){
-		Registration registration = registrationService.findById(id);
+	public ResponseEntity<RegistrationDTOResponse> findById(@PathVariable Long id){
+		RegistrationDTOResponse registration = new RegistrationDTOResponse(registrationService.findById(id));
 		return ResponseEntity.ok().body(registration);
 	}
 	
 	@PostMapping
-	public ResponseEntity<Registration> insert(@RequestBody Registration registration){
-		Registration obj = registrationService.insert(registration);
-		return ResponseEntity.status(HttpStatus.CREATED).body(obj);
+	public ResponseEntity<RegistrationDTOResponse> insert(@RequestBody RegistrationDTORequest registration){
+		Registration obj = new Registration(registration);
+		RegistrationDTOResponse response = new RegistrationDTOResponse(registrationService.insert(obj));
+		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	}
 }
