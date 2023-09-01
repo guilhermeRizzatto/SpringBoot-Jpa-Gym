@@ -1,6 +1,6 @@
 package com.guiprojects.academy.dto.request;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import com.guiprojects.academy.entities.GymMembership;
@@ -9,7 +9,7 @@ import com.guiprojects.academy.entities.GymMembership;
 public class RegistrationDTORequest {
 	
 	private Long id;
-	private Instant registrationDate;
+	private LocalDateTime registrationDate;
 	private Integer monthlyPeriod;
 	private Double price;
 	private Integer installment;
@@ -19,7 +19,7 @@ public class RegistrationDTORequest {
 	public RegistrationDTORequest() {
 	}
 	
-	public RegistrationDTORequest(Long id, Instant registrationDate, Integer monthlyPeriod, Double price,Integer installment, Boolean valid, GymMembership gymMembership) {
+	public RegistrationDTORequest(Long id, LocalDateTime registrationDate, Integer monthlyPeriod, Double price,Integer installment, Boolean valid, GymMembership gymMembership) {
 		this.id = id;
 		this.registrationDate = registrationDate;
 		this.monthlyPeriod = monthlyPeriod;
@@ -37,11 +37,11 @@ public class RegistrationDTORequest {
 		this.id = id;
 	}
 
-	public Instant getRegistrationDate() {
+	public LocalDateTime getRegistrationDate() {
 		return registrationDate;
 	}
 
-	public void setRegistrationDate(Instant registrationDate) {
+	public void setRegistrationDate(LocalDateTime registrationDate) {
 		this.registrationDate = registrationDate;
 	}
 

@@ -1,6 +1,6 @@
 package com.guiprojects.academy.dto.response;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import com.guiprojects.academy.dto.GymMembershipDTO;
@@ -10,7 +10,7 @@ import com.guiprojects.academy.entities.Registration;
 public class RegistrationDTOResponse {
 
 	private Long id;
-	private Instant registrationDate;
+	private LocalDateTime registrationDate;
 	private Integer monthlyPeriod;
 	private Double price;
 	private Integer installment;
@@ -38,11 +38,11 @@ public class RegistrationDTOResponse {
 		this.id = id;
 	}
 
-	public Instant getRegistrationDate() {
+	public LocalDateTime getRegistrationDate() {
 		return registrationDate;
 	}
 
-	public void setRegistrationDate(Instant registrationDate) {
+	public void setRegistrationDate(LocalDateTime registrationDate) {
 		this.registrationDate = registrationDate;
 	}
 

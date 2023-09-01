@@ -2,6 +2,7 @@ package com.guiprojects.academy.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import com.guiprojects.academy.dto.request.RegistrationDTORequest;
@@ -22,7 +23,7 @@ public class Registration implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private Instant registrationDate;
+	private LocalDateTime registrationDate;
 	private Integer monthlyPeriod;
 	private Double price;
 	private Integer installment;
@@ -35,7 +36,7 @@ public class Registration implements Serializable{
 	public Registration() {
 	}
 
-	public Registration(Long id, Instant registrationDate, Integer monthlyPeriod, Double price, Integer installment, Boolean valid, GymMembership gymMembership) {
+	public Registration(Long id, LocalDateTime registrationDate, Integer monthlyPeriod, Double price, Integer installment, Boolean valid, GymMembership gymMembership) {
 		super();
 		this.id = id;
 		this.registrationDate = registrationDate;
@@ -64,11 +65,11 @@ public class Registration implements Serializable{
 		this.id = id;
 	}
 
-	public Instant getRegistrationDate() {
+	public LocalDateTime getRegistrationDate() {
 		return registrationDate;
 	}
 
-	public void setRegistrationDate(Instant registrationDate) {
+	public void setRegistrationDate(LocalDateTime registrationDate) {
 		this.registrationDate = registrationDate;
 	}
 
