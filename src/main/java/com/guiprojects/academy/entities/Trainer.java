@@ -3,6 +3,8 @@ package com.guiprojects.academy.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.guiprojects.academy.dto.request.TrainerDTORequest;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,6 +28,12 @@ public class Trainer implements Serializable{
 		this.id = id;
 		this.email = email;
 		this.name = name;
+	}
+	
+	public Trainer(TrainerDTORequest obj) {
+		this.id = obj.getId();
+		this.name = obj.getName();
+		this.email = obj.getEmail();
 	}
 
 	public Long getId() {
