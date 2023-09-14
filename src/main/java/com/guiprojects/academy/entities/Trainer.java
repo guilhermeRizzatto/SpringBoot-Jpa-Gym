@@ -9,6 +9,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Trainer implements Serializable{
@@ -21,13 +23,18 @@ public class Trainer implements Serializable{
 	private String name;
 	private String email;
 	
+	@OneToOne
+	@JoinColumn(name="workLoad_id")
+	private WorkLoad workLoad;
+	
 	public Trainer() {
 	}
 	
-	public Trainer(Long id, String email, String name) {
+	public Trainer(Long id, String email, String name,WorkLoad workLoad) {
 		this.id = id;
 		this.email = email;
 		this.name = name;
+		this.workLoad = workLoad;
 	}
 	
 	public Trainer(TrainerDTORequest obj) {
@@ -58,6 +65,14 @@ public class Trainer implements Serializable{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public WorkLoad getWorkLoad() {
+		return workLoad;
+	}
+
+	public void setWorkLoad(WorkLoad workLoad) {
+		this.workLoad = workLoad;
 	}
 
 	@Override
