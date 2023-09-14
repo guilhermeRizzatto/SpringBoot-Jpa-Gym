@@ -1,12 +1,15 @@
 package com.guiprojects.academy.entities;
 
 import java.io.Serializable;
+import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Workout implements Serializable{
@@ -17,6 +20,9 @@ public class Workout implements Serializable{
 	private Long id;
 	
 	private String description;
+	
+	@OneToMany(mappedBy = "id.exerciseType")
+	Set<Exercise> exercises = new LinkedHashSet<>();
 	
 	public Workout() {
 	}
@@ -40,6 +46,10 @@ public class Workout implements Serializable{
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public Set<Exercise> getExercises(){
+		return exercises;
 	}
 
 	@Override
