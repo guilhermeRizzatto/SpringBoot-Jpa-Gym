@@ -8,7 +8,7 @@ Basically, this is made for a gym, so it has a gym Membership and your registrat
 
 Follow the diagram of the classes below:
 
-![image](https://github.com/guilhermeRizzatto/SpringBoot-Jpa-Gym/assets/126302322/72cf64f0-0a3c-44cb-a4db-a1a9e834f3d1)
+![Classe UML - GYM](https://github.com/guilhermeRizzatto/SpringBoot-Jpa-Gym/assets/126302322/6129a1ab-0231-44b6-b9b4-a0c25f2f3b35)
 
 *made by myself*
 -------------------------------------------------------------------
