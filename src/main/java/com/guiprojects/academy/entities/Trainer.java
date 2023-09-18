@@ -1,7 +1,9 @@
 package com.guiprojects.academy.entities;
 
 import java.io.Serializable;
+import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import com.guiprojects.academy.dto.request.TrainerDTORequest;
 
@@ -10,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -26,6 +29,9 @@ public class Trainer implements Serializable{
 	@OneToOne
 	@JoinColumn(name="workLoad_id")
 	private WorkLoad workLoad;
+	
+	@OneToMany(mappedBy = "trainer")
+	private Set<Workout> workouts = new LinkedHashSet<>();
 	
 	public Trainer() {
 	}
@@ -73,6 +79,10 @@ public class Trainer implements Serializable{
 
 	public void setWorkLoad(WorkLoad workLoad) {
 		this.workLoad = workLoad;
+	}
+	
+	public Set<Workout> getWorkouts() {
+		return workouts;
 	}
 
 	@Override
