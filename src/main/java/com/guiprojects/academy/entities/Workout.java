@@ -21,7 +21,7 @@ public class Workout implements Serializable{
 	
 	private String description;
 	
-	@OneToMany(mappedBy = "id.exerciseType")
+	@OneToMany(mappedBy = "id.workout")
 	Set<Exercise> exercises = new LinkedHashSet<>();
 	
 	public Workout() {
