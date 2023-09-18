@@ -31,6 +31,10 @@ public class GymMembership implements Serializable{
 	@JoinColumn(name="registration_id")
 	private Registration registration;
 	
+	@OneToOne
+	@JoinColumn(name="workout_id")
+	private Workout workout;
+	
 	public GymMembership() {
 	}
 
@@ -116,6 +120,14 @@ public class GymMembership implements Serializable{
 
 	public void setRegistration(Registration registration) {
 		this.registration = registration;
+	}
+	
+	public Workout getWorkout() {
+		return workout;
+	}
+
+	public void setWorkout(Workout workout) {
+		this.workout = workout;
 	}
 	
 
