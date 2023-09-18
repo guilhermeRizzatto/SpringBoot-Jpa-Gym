@@ -9,7 +9,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Workout implements Serializable{
@@ -21,15 +23,25 @@ public class Workout implements Serializable{
 	
 	private String description;
 	
+	@OneToOne
+	@JoinColumn(name="gymMembership_id")
+	private GymMembership gymMembership;
+	
+	@OneToOne
+	@JoinColumn(name="trainer_id")
+	private Trainer trainer;
+	
 	@OneToMany(mappedBy = "id.workout")
 	Set<Exercise> exercises = new LinkedHashSet<>();
 	
 	public Workout() {
 	}
 
-	public Workout(Long id, String description) {
+	public Workout(Long id, String description, GymMembership gymMembership, Trainer trainer) {
 		this.id = id;
 		this.description = description;
+		this.gymMembership = gymMembership;
+		this.trainer = trainer;
 	}
 
 	public Long getId() {
@@ -48,6 +60,22 @@ public class Workout implements Serializable{
 		this.description = description;
 	}
 	
+	public GymMembership getGymMembership() {
+		return gymMembership;
+	}
+
+	public void setGymMembership(GymMembership gymMembership) {
+		this.gymMembership = gymMembership;
+	}
+
+	public Trainer getTrainer() {
+		return trainer;
+	}
+
+	public void setTrainer(Trainer trainer) {
+		this.trainer = trainer;
+	}
+
 	public Set<Exercise> getExercises(){
 		return exercises;
 	}
