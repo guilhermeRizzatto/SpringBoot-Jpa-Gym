@@ -17,17 +17,17 @@ public class WorkLoadDTORequest {
 	
 	private Trainer trainer;
 	
-	private Set<WeekDays> days = new LinkedHashSet<>();
+	private Set<WeekDays> days;
 	
 	public WorkLoadDTORequest() {
 	}
 
-	public WorkLoadDTORequest(Long id, LocalTime entryTime, LocalTime departureTime, Trainer trainer) {
+	public WorkLoadDTORequest(Long id, LocalTime entryTime, LocalTime departureTime, Trainer trainer, Set<WeekDays> days) {
 		this.id = id;
 		this.entryTime = entryTime;
 		this.departureTime = departureTime;
 		this.trainer = trainer;
-		
+		this.days = days;
 	}
 	
 	public WorkLoadDTORequest(WorkLoad obj) {
@@ -74,7 +74,9 @@ public class WorkLoadDTORequest {
 		return days;
 	}
 
-	
+	public void setDays(Set<WeekDays> days) {
+		this.days = days;
+	}
 	
 	
 	
