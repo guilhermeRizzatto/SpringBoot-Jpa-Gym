@@ -6,6 +6,7 @@ import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import com.guiprojects.academy.dto.request.WorkLoadDTORequest;
 import com.guiprojects.academy.entities.enums.WeekDays;
 
 import jakarta.persistence.CollectionTable;
@@ -51,6 +52,14 @@ public class WorkLoad implements Serializable{
 		this.entryTime = entryTime;
 		this.departureTime = departureTime;
 		this.trainer = trainer;
+	}
+	
+	public WorkLoad(WorkLoadDTORequest obj) {
+		this.id = obj.getId();
+		this.entryTime = obj.getEntryTime();
+		this.departureTime = obj.getDepartureTime();
+		this.trainer = obj.getTrainer();
+		this.days = obj.getDays();
 	}
 	
 	public Long getId() {
