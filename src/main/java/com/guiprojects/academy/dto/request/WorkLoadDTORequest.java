@@ -1,11 +1,9 @@
 package com.guiprojects.academy.dto.request;
 
 import java.time.LocalTime;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 import com.guiprojects.academy.entities.Trainer;
-import com.guiprojects.academy.entities.WorkLoad;
 import com.guiprojects.academy.entities.enums.WeekDays;
 
 public class WorkLoadDTORequest {
@@ -30,14 +28,6 @@ public class WorkLoadDTORequest {
 		this.days = days;
 	}
 	
-	public WorkLoadDTORequest(WorkLoad obj) {
-		this.id = obj.getId();
-		this.entryTime = obj.getEntryTime();
-		this.departureTime = obj.getDepartureTime();
-		this.trainer = obj.getTrainer();
-		this.days = obj.getDays();
-	}
-
 	public Long getId() {
 		return id;
 	}

@@ -1,14 +1,11 @@
 package com.guiprojects.academy.dto;
 
-import java.util.Objects;
-
 import com.guiprojects.academy.entities.GymMembership;
 
 //Only use in the RegistrationDTOResponse
 //Contain only informations necessary for Registration
 public class GymMembershipDTO {
 
-	private Long id;
 	private String name;
 	private String cpf;
 	private String phone;
@@ -16,26 +13,16 @@ public class GymMembershipDTO {
 	public GymMembershipDTO() {
 	}
 
-	public GymMembershipDTO(Long id, String name, String cpf, String phone) {
-		this.id = id;
+	public GymMembershipDTO(Long id, String name, String cpf, String phone) {	
 		this.name = name;
 		this.cpf = cpf;
 		this.phone = phone;
 	}
 	
 	public GymMembershipDTO(GymMembership obj) {
-		this.id = obj.getId();
 		this.name = obj.getName();
 		this.cpf = obj.getCpf();
 		this.phone = obj.getPhone();
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getName() {
@@ -61,25 +48,6 @@ public class GymMembershipDTO {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		GymMembershipDTO other = (GymMembershipDTO) obj;
-		return Objects.equals(id, other.id);
-	}
-	
-	
 	
 	
 }

@@ -1,14 +1,10 @@
 package com.guiprojects.academy.dto.response;
 
-import java.util.Objects;
-
-
 import com.guiprojects.academy.entities.GymMembership;
 
 
 public class GymMembershipDTOResponse {
 
-	private Long id;
 	private String name;
 	private String phone;
 	private Integer age;
@@ -19,21 +15,11 @@ public class GymMembershipDTOResponse {
 	}
 	
 	public GymMembershipDTOResponse(GymMembership obj) {
-		this.id = obj.getId();
 		this.name = obj.getName();		
 		this.phone = obj.getPhone();
 		this.age = obj.getAge();
 		this.weight = obj.getWeight();
 		this.height = obj.getHeight();		
-	}
-	
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getName() {
@@ -76,23 +62,5 @@ public class GymMembershipDTOResponse {
 		this.height = height;
 	}
 
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		GymMembershipDTOResponse other = (GymMembershipDTOResponse) obj;
-		return Objects.equals(id, other.id);
-	}
-	
 	
 }
