@@ -1,14 +1,19 @@
 package com.guiprojects.academy.dto.response;
 
+import java.util.Set;
+
+import com.guiprojects.academy.dto.WorkLoadDTO;
+import com.guiprojects.academy.dto.WorkoutDTOTrainer;
 import com.guiprojects.academy.entities.Trainer;
-import com.guiprojects.academy.entities.WorkLoad;
 
 public class TrainerDTOResponse {
 	
 	private String name;
 	private String email;
 	
-	private WorkLoad workLoad;
+	private WorkLoadDTO workLoad;
+	
+	Set<WorkoutDTOTrainer> workouts;
 	
 	public TrainerDTOResponse() {
 	}
@@ -16,7 +21,8 @@ public class TrainerDTOResponse {
 	public TrainerDTOResponse(Trainer obj) {
 		this.name = obj.getName();
 		this.email = obj.getEmail();
-		this.workLoad = obj.getWorkLoad();
+		this.workLoad = new WorkLoadDTO(obj.getWorkLoad());
+		this.workouts = obj.addWorkouts(obj.getWorkouts());
 	}
 
 	public String getName() {
@@ -35,14 +41,23 @@ public class TrainerDTOResponse {
 		this.email = email;
 	}
 	
-	public WorkLoad getWorkLoad() {
+	public WorkLoadDTO getWorkLoad() {
 		return workLoad;
 	}
 
-	public void setWorkLoad(WorkLoad workLoad) {
+	public void setWorkLoad(WorkLoadDTO workLoad) {
 		this.workLoad = workLoad;
 	}
 
+	public Set<WorkoutDTOTrainer> getWorkouts() {
+		return workouts;
+	}
+
+	public void setWorkouts(Set<WorkoutDTOTrainer> workouts) {
+		this.workouts = workouts;
+	}
+
+	
 	
 	
 

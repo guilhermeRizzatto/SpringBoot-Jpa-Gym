@@ -5,6 +5,7 @@ import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import com.guiprojects.academy.dto.WorkoutDTOTrainer;
 import com.guiprojects.academy.dto.request.TrainerDTORequest;
 
 import jakarta.persistence.Entity;
@@ -102,7 +103,14 @@ public class Trainer implements Serializable{
 		return Objects.equals(id, other.id);
 	}
 	
-	
+	public Set<WorkoutDTOTrainer> addWorkouts(Set<Workout> workouts){
+		Set<WorkoutDTOTrainer> workoutDTOs = new LinkedHashSet<>();
+		for(Workout x : workouts) {
+			WorkoutDTOTrainer obj = new WorkoutDTOTrainer(x);
+			workoutDTOs.add(obj);
+		}
+		return workoutDTOs;
+	}
 	
 	
 

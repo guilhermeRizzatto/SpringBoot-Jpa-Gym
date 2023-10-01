@@ -3,7 +3,7 @@ package com.guiprojects.academy.dto.response;
 import java.time.LocalTime;
 import java.util.Set;
 
-import com.guiprojects.academy.entities.Trainer;
+import com.guiprojects.academy.dto.TrainerDTO;
 import com.guiprojects.academy.entities.WorkLoad;
 import com.guiprojects.academy.entities.enums.WeekDays;
 
@@ -12,7 +12,7 @@ public class WorkLoadDTOResponse {
 	private LocalTime entryTime;
 	private LocalTime departureTime;
 	
-	private Trainer trainer;
+	private TrainerDTO trainer;
 	
 	private Set<WeekDays> days;
 	
@@ -22,7 +22,7 @@ public class WorkLoadDTOResponse {
 	public WorkLoadDTOResponse(WorkLoad obj) {
 		this.entryTime = obj.getEntryTime();
 		this.departureTime = obj.getDepartureTime();
-		this.trainer = obj.getTrainer();
+		this.trainer = new TrainerDTO(obj.getTrainer());
 		this.days = obj.getDays();
 	}
 
@@ -42,11 +42,11 @@ public class WorkLoadDTOResponse {
 		this.departureTime = departureTime;
 	}
 
-	public Trainer getTrainer() {
+	public TrainerDTO getTrainer() {
 		return trainer;
 	}
 
-	public void setTrainer(Trainer trainer) {
+	public void setTrainer(TrainerDTO trainer) {
 		this.trainer = trainer;
 	}
 

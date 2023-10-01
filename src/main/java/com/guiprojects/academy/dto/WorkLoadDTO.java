@@ -7,10 +7,10 @@ import com.guiprojects.academy.entities.Trainer;
 import com.guiprojects.academy.entities.WorkLoad;
 import com.guiprojects.academy.entities.enums.WeekDays;
 
-public class WorkLoadDTO {
-	
 //Only use in the TrainerDTOResponse
 //Contain only informations necessary for Trainer
+public class WorkLoadDTO {
+	
 		
 	private LocalTime entryTime;
 	private LocalTime departureTime;
