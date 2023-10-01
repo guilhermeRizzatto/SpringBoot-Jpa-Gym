@@ -97,6 +97,10 @@ public class Workout implements Serializable{
 		return Objects.equals(id, other.id);
 	}
 	
+	public void addExercise(Set<Exercise> exercises) {
+		
+	}
+	
 	
 	
 	
