@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import com.guiprojects.academy.dto.request.WorkoutDTORequest;
+import com.guiprojects.academy.dto.response.ExerciseDTOResponse;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -87,6 +88,15 @@ public class Workout implements Serializable{
 
 	public Set<Exercise> getExercises(){
 		return exercises;
+	}
+	
+	public Set<ExerciseDTOResponse> returnExerciseDTO(Set<Exercise> exercises){
+		Set<ExerciseDTOResponse> exercisesDTO = new LinkedHashSet<>();
+		for(Exercise x : exercises) {
+			ExerciseDTOResponse dto = new ExerciseDTOResponse(x);
+			exercisesDTO.add(dto);
+		}
+		return exercisesDTO;
 	}
 
 	@Override
