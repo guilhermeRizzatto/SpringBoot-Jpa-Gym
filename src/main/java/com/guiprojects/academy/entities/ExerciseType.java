@@ -3,6 +3,8 @@ package com.guiprojects.academy.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.guiprojects.academy.dto.request.ExerciseTypeDTORequest;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,6 +30,13 @@ public class ExerciseType implements Serializable{
 		this.muscleGroup = muscleGroup;
 	}
 
+	public ExerciseType(ExerciseTypeDTORequest obj) {
+		this.id = obj.getId();
+		this.name = obj.getName();
+		this.muscleGroup = obj.getMuscleGroup();
+	}
+	
+	
 	public Long getId() {
 		return id;
 	}

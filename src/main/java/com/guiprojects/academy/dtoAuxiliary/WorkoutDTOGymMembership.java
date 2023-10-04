@@ -1,4 +1,4 @@
-package com.guiprojects.academy.dto;
+package com.guiprojects.academy.dtoAuxiliary;
 
 import java.util.Set;
 

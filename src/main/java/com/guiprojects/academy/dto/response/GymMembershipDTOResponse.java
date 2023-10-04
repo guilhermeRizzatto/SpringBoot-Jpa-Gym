@@ -1,6 +1,6 @@
 package com.guiprojects.academy.dto.response;
 
-import com.guiprojects.academy.dto.WorkoutDTOGymMembership;
+import com.guiprojects.academy.dtoAuxiliary.WorkoutDTOGymMembership;
 import com.guiprojects.academy.entities.GymMembership;
 
 

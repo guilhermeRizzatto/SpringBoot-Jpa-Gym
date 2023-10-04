@@ -5,8 +5,8 @@ import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import com.guiprojects.academy.dto.WorkoutDTOTrainer;
 import com.guiprojects.academy.dto.request.TrainerDTORequest;
+import com.guiprojects.academy.dtoAuxiliary.WorkoutDTOTrainer;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

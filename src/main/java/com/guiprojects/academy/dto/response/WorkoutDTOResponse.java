@@ -2,8 +2,8 @@ package com.guiprojects.academy.dto.response;
 
 import java.util.Set;
 
-import com.guiprojects.academy.dto.GymMembershipDTOWorkout;
-import com.guiprojects.academy.dto.TrainerDTO;
+import com.guiprojects.academy.dtoAuxiliary.GymMembershipDTOWorkout;
+import com.guiprojects.academy.dtoAuxiliary.TrainerDTO;
 import com.guiprojects.academy.entities.Exercise;
 import com.guiprojects.academy.entities.Workout;
 

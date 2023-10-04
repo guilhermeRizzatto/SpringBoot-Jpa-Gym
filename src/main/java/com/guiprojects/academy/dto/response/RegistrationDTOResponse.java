@@ -2,7 +2,7 @@ package com.guiprojects.academy.dto.response;
 
 import java.time.LocalDateTime;
 
-import com.guiprojects.academy.dto.GymMembershipDTO;
+import com.guiprojects.academy.dtoAuxiliary.GymMembershipDTO;
 import com.guiprojects.academy.entities.GymMembership;
 import com.guiprojects.academy.entities.Registration;
 

@@ -2,8 +2,8 @@ package com.guiprojects.academy.dto.response;
 
 import java.util.Set;
 
-import com.guiprojects.academy.dto.WorkLoadDTO;
-import com.guiprojects.academy.dto.WorkoutDTOTrainer;
+import com.guiprojects.academy.dtoAuxiliary.WorkLoadDTO;
+import com.guiprojects.academy.dtoAuxiliary.WorkoutDTOTrainer;
 import com.guiprojects.academy.entities.Trainer;
 
 public class TrainerDTOResponse {

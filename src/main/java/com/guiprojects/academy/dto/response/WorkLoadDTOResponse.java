@@ -3,7 +3,7 @@ package com.guiprojects.academy.dto.response;
 import java.time.LocalTime;
 import java.util.Set;
 
-import com.guiprojects.academy.dto.TrainerDTO;
+import com.guiprojects.academy.dtoAuxiliary.TrainerDTO;
 import com.guiprojects.academy.entities.WorkLoad;
 import com.guiprojects.academy.entities.enums.WeekDays;
 

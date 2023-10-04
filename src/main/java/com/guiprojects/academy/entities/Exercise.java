@@ -3,6 +3,7 @@ package com.guiprojects.academy.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.guiprojects.academy.dto.request.ExerciseDTORequest;
 import com.guiprojects.academy.entities.pk.ExercisePK;
 
 import jakarta.persistence.EmbeddedId;
@@ -28,6 +29,14 @@ public class Exercise implements Serializable{
 		this.sets = sets;
 		this.reps = reps;
 		this.intervalSeconds = intervalSeconds;
+	}
+	
+	public Exercise(ExerciseDTORequest obj) {
+		id.setExerciseType(obj.getExerciseType());
+		id.setWorkout(obj.getWorkout());
+		this.sets = obj.getSets();
+		this.reps = obj.getReps();
+		this.intervalSeconds = obj.getIntervalSeconds();
 	}
 	
 	public ExerciseType getExerciseType() {

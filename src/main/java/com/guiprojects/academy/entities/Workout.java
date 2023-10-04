@@ -5,6 +5,8 @@ import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import com.guiprojects.academy.dto.request.WorkoutDTORequest;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -42,6 +44,13 @@ public class Workout implements Serializable{
 		this.description = description;
 		this.gymMembership = gymMembership;
 		this.trainer = trainer;
+	}
+	
+	public Workout(WorkoutDTORequest obj) {
+		this.id = obj.getId();
+		this.description = obj.getDescription();
+		this.gymMembership = obj.getGymMembership();
+		this.trainer = obj.getTrainer();
 	}
 
 	public Long getId() {
