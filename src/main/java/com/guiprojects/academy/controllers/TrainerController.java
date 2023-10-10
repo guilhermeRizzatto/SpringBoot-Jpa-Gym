@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.guiprojects.academy.dto.request.TrainerDTORequest;
+import com.guiprojects.academy.dto.response.TrainerDTOBaseResponse;
 import com.guiprojects.academy.dto.response.TrainerDTOResponse;
 import com.guiprojects.academy.entities.Trainer;
 import com.guiprojects.academy.services.TrainerService;
@@ -24,16 +25,22 @@ public class TrainerController {
 	
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<TrainerDTOResponse> findById(@PathVariable Long id){
+	public ResponseEntity<TrainerDTOBaseResponse> findById(@PathVariable Long id){
+		TrainerDTOBaseResponse obj = new TrainerDTOBaseResponse(trainerService.findById(id));
+		return ResponseEntity.ok().body(obj);
+	}
+	
+	@GetMapping(value = "/full/{id}")
+	public ResponseEntity<TrainerDTOResponse> findByIdFull(@PathVariable Long id){
 		TrainerDTOResponse obj = new TrainerDTOResponse(trainerService.findById(id));
 		return ResponseEntity.ok().body(obj);
 	}
 	
 	
 	@PostMapping
-	public ResponseEntity<TrainerDTOResponse> insert(@RequestBody TrainerDTORequest request){
+	public ResponseEntity<TrainerDTOBaseResponse> insert(@RequestBody TrainerDTORequest request){
 		Trainer obj = new Trainer(request);	
-		TrainerDTOResponse response = new TrainerDTOResponse(trainerService.insert(obj));
+		TrainerDTOBaseResponse response = new TrainerDTOBaseResponse(trainerService.insert(obj));
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	}
 	
