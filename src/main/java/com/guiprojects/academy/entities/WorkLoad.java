@@ -59,7 +59,7 @@ public class WorkLoad implements Serializable{
 		this.entryTime = obj.getEntryTime();
 		this.departureTime = obj.getDepartureTime();
 		this.trainer = obj.getTrainer();
-		this.days = obj.getDays();
+		this.days = addDays(obj.getDays());
 	}
 	
 	public Long getId() {
@@ -113,6 +113,14 @@ public class WorkLoad implements Serializable{
 			return false;
 		WorkLoad other = (WorkLoad) obj;
 		return Objects.equals(id, other.id);
+	}
+	
+	public Set<WeekDays> addDays(Set<WeekDays> daysDTO){
+		Set<WeekDays> days = new LinkedHashSet<>();
+		for(WeekDays x : daysDTO) {
+			days.add(x);
+		}
+		return days;
 	}
 	
 	
