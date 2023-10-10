@@ -4,22 +4,22 @@ import com.guiprojects.academy.entities.GymMembership;
 
 //Only use in the RegistrationDTOResponse
 //Contain only informations necessary for Registration
-public class GymMembershipDTO {
+public class GymMembershipDTORegistration {
 
 	private String name;
 	private String cpf;
 	private String phone;
 	
-	public GymMembershipDTO() {
+	public GymMembershipDTORegistration() {
 	}
 
-	public GymMembershipDTO(Long id, String name, String cpf, String phone) {	
+	public GymMembershipDTORegistration(Long id, String name, String cpf, String phone) {	
 		this.name = name;
 		this.cpf = cpf;
 		this.phone = phone;
 	}
 	
-	public GymMembershipDTO(GymMembership obj) {
+	public GymMembershipDTORegistration(GymMembership obj) {
 		this.name = obj.getName();
 		this.cpf = obj.getCpf();
 		this.phone = obj.getPhone();

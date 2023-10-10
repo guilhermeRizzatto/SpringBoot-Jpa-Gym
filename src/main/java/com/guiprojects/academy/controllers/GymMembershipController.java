@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.guiprojects.academy.dto.request.GymMembershipDTORequest;
+import com.guiprojects.academy.dto.response.GymMembershipDTOBaseResponse;
 import com.guiprojects.academy.dto.response.GymMembershipDTOResponse;
 import com.guiprojects.academy.entities.GymMembership;
 import com.guiprojects.academy.services.GymMembershipService;
@@ -23,15 +24,21 @@ public class GymMembershipController {
 	private GymMembershipService membershipService;
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<GymMembershipDTOResponse> findById(@PathVariable Long id){
+	public ResponseEntity<GymMembershipDTOBaseResponse> findById(@PathVariable Long id){
+		GymMembershipDTOBaseResponse obj = new GymMembershipDTOBaseResponse(membershipService.findById(id));
+		return ResponseEntity.ok().body(obj);
+	}
+	
+	@GetMapping(value = "/withWorkout/{id}")
+	public ResponseEntity<GymMembershipDTOResponse> findByIdWithWorkout(@PathVariable Long id){
 		GymMembershipDTOResponse obj = new GymMembershipDTOResponse(membershipService.findById(id));
 		return ResponseEntity.ok().body(obj);
 	}
 	
 	@PostMapping
-	public ResponseEntity<GymMembershipDTOResponse> insert(@RequestBody GymMembershipDTORequest request){
+	public ResponseEntity<GymMembershipDTOBaseResponse> insert(@RequestBody GymMembershipDTORequest request){
 		GymMembership obj = new GymMembership(request);		
-		GymMembershipDTOResponse response = new GymMembershipDTOResponse(membershipService.insert(obj));
+		GymMembershipDTOBaseResponse response = new GymMembershipDTOBaseResponse(membershipService.insert(obj));
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	}
 	
