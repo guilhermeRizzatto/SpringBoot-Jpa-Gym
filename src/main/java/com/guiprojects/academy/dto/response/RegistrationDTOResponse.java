@@ -2,7 +2,7 @@ package com.guiprojects.academy.dto.response;
 
 import java.time.LocalDateTime;
 
-import com.guiprojects.academy.dtoAuxiliary.GymMembershipDTO;
+import com.guiprojects.academy.dtoAuxiliary.GymMembershipDTORegistration;
 import com.guiprojects.academy.entities.GymMembership;
 import com.guiprojects.academy.entities.Registration;
 
@@ -13,7 +13,7 @@ public class RegistrationDTOResponse {
 	private Double price;
 	private Integer installment;
 	private Boolean valid;
-	private GymMembershipDTO gymMembership;
+	private GymMembershipDTORegistration gymMembership;
 	
 	public RegistrationDTOResponse() {
 	}
@@ -24,7 +24,7 @@ public class RegistrationDTOResponse {
 		this.price = obj.getPrice();
 		this.installment = obj.getInstallment();
 		this.valid = obj.getValid();
-		this.gymMembership = new GymMembershipDTO(obj.getGymMembership());
+		this.gymMembership = new GymMembershipDTORegistration(obj.getGymMembership());
 	}
 
 	public LocalDateTime getRegistrationDate() {
@@ -67,12 +67,12 @@ public class RegistrationDTOResponse {
 		this.valid = valid;
 	}
 
-	public GymMembershipDTO getGymMembership() {
+	public GymMembershipDTORegistration getGymMembership() {
 		return gymMembership;
 	}
 
 	public void setGymMembership(GymMembership gymMembership) {
-		this.gymMembership = new GymMembershipDTO(gymMembership);
+		this.gymMembership = new GymMembershipDTORegistration(gymMembership);
 	}
 
 	
