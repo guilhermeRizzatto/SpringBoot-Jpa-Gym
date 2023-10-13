@@ -1,5 +1,8 @@
 package com.guiprojects.academy.dto.response;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import com.guiprojects.academy.entities.Exercise;
 
 public class ExerciseDTOResponse {
@@ -26,6 +29,7 @@ public class ExerciseDTOResponse {
 		this.reps = obj.getReps();
 		this.intervalSeconds = obj.getIntervalSeconds();
 	}
+	
 
 	public ExerciseTypeDTOResponse getExerciseType() {
 		return exerciseType;
@@ -59,6 +63,22 @@ public class ExerciseDTOResponse {
 		this.intervalSeconds = intervalSeconds;
 	}
 	
+	public static Set<ExerciseDTOResponse> createExercises (Set<Exercise> list) {
+		Set<ExerciseDTOResponse> exercises = new LinkedHashSet<>();
+		
+		for(Exercise x : list) {
+			ExerciseDTOResponse exercise = new ExerciseDTOResponse();
+			
+			exercise.setExerciseType(new ExerciseTypeDTOResponse(x.getExerciseType()));
+			exercise.setSets(x.getSets()); 
+			exercise.setReps(x.getReps()); 
+			exercise.setIntervalSeconds(x.getIntervalSeconds()); 
+			
+			exercises.add(exercise);
+		}
+		
+		return exercises;
+	}
 	
 	
 	
