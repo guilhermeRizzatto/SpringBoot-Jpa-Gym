@@ -5,9 +5,10 @@ import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import com.guiprojects.academy.dto.request.WorkoutDTORequest;
+import com.guiprojects.academy.dto.request.WorkoutDTORequestPOST;
 import com.guiprojects.academy.dto.response.ExerciseDTOResponse;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,6 +25,7 @@ public class Workout implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@Column(columnDefinition = "TEXT")
 	private String description;
 	
 	@OneToOne
@@ -47,7 +49,7 @@ public class Workout implements Serializable{
 		this.trainer = trainer;
 	}
 	
-	public Workout(WorkoutDTORequest obj) {
+	public Workout(WorkoutDTORequestPOST obj) {
 		this.id = obj.getId();
 		this.description = obj.getDescription();
 		this.gymMembership = obj.getGymMembership();

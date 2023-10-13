@@ -6,7 +6,8 @@ import com.guiprojects.academy.dtoAuxiliary.GymMembershipDTOWorkout;
 import com.guiprojects.academy.dtoAuxiliary.TrainerDTO;
 import com.guiprojects.academy.entities.Workout;
 
-public class WorkoutDTOResponse {
+//Only use when need the Exercises
+public class WorkoutDTOResponseFULL {
 	
 	private String description;
 	private GymMembershipDTOWorkout gymMembership;
@@ -15,14 +16,14 @@ public class WorkoutDTOResponse {
 	
 	Set<ExerciseDTOResponse> exercises;
 	
-	public WorkoutDTOResponse() {
+	public WorkoutDTOResponseFULL() {
 	}
 
-	public WorkoutDTOResponse(Workout obj) {
+	public WorkoutDTOResponseFULL(Workout obj) {
 		this.description = obj.getDescription();
 		this.gymMembership = new GymMembershipDTOWorkout(obj.getGymMembership());
 		this.trainer = new TrainerDTO(obj.getTrainer());
-		this.exercises = obj.returnExerciseDTO(obj.getExercises());
+		this.exercises = ExerciseDTOResponse.createExercises(obj.getExercises());
 	}
 
 	public String getDescription() {
@@ -56,11 +57,9 @@ public class WorkoutDTOResponse {
 	public void setExercises(Set<ExerciseDTOResponse> exercises) {
 		this.exercises = exercises;
 	}
+
 	
-	
-	
-	
-	
+
 	
 
 }

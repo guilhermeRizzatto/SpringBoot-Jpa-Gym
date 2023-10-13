@@ -6,8 +6,8 @@ import com.guiprojects.academy.entities.Exercise;
 import com.guiprojects.academy.entities.GymMembership;
 import com.guiprojects.academy.entities.Trainer;
 
-public class WorkoutDTORequest {
-	
+//Only use in PUT method in the Controller
+public class WorkoutDTORequestPUT {
 	
 	private Long id;
 	private String description;
@@ -17,10 +17,10 @@ public class WorkoutDTORequest {
 	
 	Set<Exercise> exercises;
 	
-	public WorkoutDTORequest() {
+	public WorkoutDTORequestPUT() {
 	}
 
-	public WorkoutDTORequest(Long id, String description, GymMembership gymMembership, Trainer trainer, Set<Exercise> exercises) {
+	public WorkoutDTORequestPUT(Long id, String description, GymMembership gymMembership, Trainer trainer, Set<Exercise> exercises) {
 		this.id = id;
 		this.description = description;
 		this.gymMembership = gymMembership;
