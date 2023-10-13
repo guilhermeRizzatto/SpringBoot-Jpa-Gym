@@ -24,7 +24,7 @@ public class TrainerController {
 	private TrainerService trainerService;
 	
 	
-	@GetMapping(value = "/{id}")
+	@GetMapping(value = "/base/{id}")
 	public ResponseEntity<TrainerDTOBaseResponse> findById(@PathVariable Long id){
 		TrainerDTOBaseResponse obj = new TrainerDTOBaseResponse(trainerService.findById(id));
 		return ResponseEntity.ok().body(obj);
