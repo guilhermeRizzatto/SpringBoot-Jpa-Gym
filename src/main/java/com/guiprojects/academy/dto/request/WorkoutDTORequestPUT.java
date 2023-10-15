@@ -15,7 +15,7 @@ public class WorkoutDTORequestPUT {
 	
 	private Trainer trainer;
 	
-	Set<Exercise> exercises;
+	private Set<Exercise> exercises;
 	
 	public WorkoutDTORequestPUT() {
 	}

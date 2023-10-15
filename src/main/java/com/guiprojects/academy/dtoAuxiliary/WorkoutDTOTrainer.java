@@ -1,8 +1,5 @@
 package com.guiprojects.academy.dtoAuxiliary;
 
-import java.util.Set;
-
-import com.guiprojects.academy.entities.Exercise;
 import com.guiprojects.academy.entities.Workout;
 
 //Only use in the TrainerDTOResponse
@@ -12,21 +9,18 @@ public class WorkoutDTOTrainer {
 	private String description;
 	private GymMembershipDTOWorkout gymMembership;
 	
-	Set<Exercise> exercises;
 	
 	public WorkoutDTOTrainer() {
 	}
 
-	public WorkoutDTOTrainer(String description, GymMembershipDTOWorkout gymMembership, Set<Exercise> exercises) {
+	public WorkoutDTOTrainer(String description, GymMembershipDTOWorkout gymMembership) {
 		this.description = description;
 		this.gymMembership = gymMembership;
-		this.exercises = exercises;
 	}
 
 	public WorkoutDTOTrainer(Workout obj) {
 		this.description = obj.getDescription();
 		this.gymMembership = new GymMembershipDTOWorkout(obj.getGymMembership());
-		this.exercises = obj.getExercises();
 	}
 
 	public String getDescription() {
@@ -45,13 +39,7 @@ public class WorkoutDTOTrainer {
 		this.gymMembership = gymMembership;
 	}
 
-	public Set<Exercise> getExercises() {
-		return exercises;
-	}
-
-	public void setExercises(Set<Exercise> exercises) {
-		this.exercises = exercises;
-	}
+	
 	
 	
 	

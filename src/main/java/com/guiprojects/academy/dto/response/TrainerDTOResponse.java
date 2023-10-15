@@ -1,5 +1,6 @@
 package com.guiprojects.academy.dto.response;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import com.guiprojects.academy.dtoAuxiliary.WorkLoadDTO;
@@ -13,7 +14,7 @@ public class TrainerDTOResponse {
 	
 	private WorkLoadDTO workLoad;
 	
-	Set<WorkoutDTOTrainer> workouts;
+	private Set<WorkoutDTOTrainer> workouts;
 	
 	public TrainerDTOResponse() {
 	}
@@ -55,6 +56,23 @@ public class TrainerDTOResponse {
 
 	public void setWorkouts(Set<WorkoutDTOTrainer> workouts) {
 		this.workouts = workouts;
+	}
+	
+	public static Set<TrainerDTOResponse> createExercises (Set<Trainer> list) {
+		Set<TrainerDTOResponse> trainers = new LinkedHashSet<>();
+		
+		for(Trainer x : list) {
+			TrainerDTOResponse trainer = new TrainerDTOResponse();
+			
+			trainer.setEmail(x.getEmail());
+			trainer.setName(x.getName()); 
+			trainer.setWorkLoad(new WorkLoadDTO(x.getWorkLoad())); 
+			trainer.setWorkouts(x.addWorkouts(x.getWorkouts())); 
+			
+			trainers.add(trainer);
+		}
+		
+		return trainers;
 	}
 
 	

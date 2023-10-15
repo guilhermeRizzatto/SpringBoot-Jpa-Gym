@@ -14,7 +14,7 @@ public class WorkoutDTOResponseFULL {
 	
 	private TrainerDTO trainer;
 	
-	Set<ExerciseDTOResponse> exercises;
+	private Set<ExerciseDTOResponse> exercises;
 	
 	public WorkoutDTOResponseFULL() {
 	}

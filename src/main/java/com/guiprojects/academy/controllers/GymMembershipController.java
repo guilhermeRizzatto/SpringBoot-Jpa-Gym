@@ -31,7 +31,7 @@ public class GymMembershipController {
 	
 	@GetMapping(value = "/withWorkout/{id}")
 	public ResponseEntity<GymMembershipDTOResponse> findByIdWithWorkout(@PathVariable Long id){
-		GymMembershipDTOResponse obj = new GymMembershipDTOResponse(membershipService.findById(id));
+		GymMembershipDTOResponse obj = new GymMembershipDTOResponse(membershipService.findFullById(id));
 		return ResponseEntity.ok().body(obj);
 	}
 	

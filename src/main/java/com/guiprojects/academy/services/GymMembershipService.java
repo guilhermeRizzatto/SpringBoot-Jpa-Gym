@@ -22,4 +22,9 @@ public class GymMembershipService {
 		Optional<GymMembership> obj = membershipRepository.findById(id);
 		return obj.get();
 	}
+	
+	public GymMembership findFullById(Long id) {
+		Optional<GymMembership> obj = membershipRepository.findFullById(id);
+		return obj.get();
+	}
 }

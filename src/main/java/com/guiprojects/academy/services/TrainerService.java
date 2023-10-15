@@ -1,6 +1,7 @@
 package com.guiprojects.academy.services;
 
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,11 @@ public class TrainerService {
 	public Trainer findById (Long id) {
 		Optional<Trainer> obj = trainerRepository.findById(id);
 		return obj.get();
+	}
+	
+	public Set<Trainer> findFullById (Long id) {
+		Set<Trainer> list = trainerRepository.findFullById(id);
+		return list;
 	}
 	
 	public Trainer insert (Trainer trainer) {
