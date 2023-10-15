@@ -14,6 +14,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
@@ -32,7 +33,7 @@ public class Workout implements Serializable{
 	@JoinColumn(name="gymMembership_id")
 	private GymMembership gymMembership;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="trainer_id")
 	private Trainer trainer;
 	

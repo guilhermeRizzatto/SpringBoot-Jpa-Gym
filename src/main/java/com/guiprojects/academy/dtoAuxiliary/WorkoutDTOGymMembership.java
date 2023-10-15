@@ -2,7 +2,7 @@ package com.guiprojects.academy.dtoAuxiliary;
 
 import java.util.Set;
 
-import com.guiprojects.academy.entities.Exercise;
+import com.guiprojects.academy.dto.response.ExerciseDTOResponse;
 import com.guiprojects.academy.entities.Workout;
 
 //Only use in the GymMembershipDTOResponse
@@ -13,12 +13,12 @@ public class WorkoutDTOGymMembership {
 	
 	private TrainerDTO trainer;
 	
-	Set<Exercise> exercises;
+	private Set<ExerciseDTOResponse> exercises;
 	
 	public WorkoutDTOGymMembership() {
 	}
 
-	public WorkoutDTOGymMembership(String description, TrainerDTO trainer, Set<Exercise> exercises) {
+	public WorkoutDTOGymMembership(String description, TrainerDTO trainer, Set<ExerciseDTOResponse> exercises) {
 		this.description = description;
 		this.trainer = trainer;
 		this.exercises = exercises;
@@ -28,7 +28,7 @@ public class WorkoutDTOGymMembership {
 		super();
 		this.description = obj.getDescription();
 		this.trainer = new TrainerDTO(obj.getTrainer());
-		this.exercises = obj.getExercises();
+		this.exercises = ExerciseDTOResponse.createExercises(obj.getExercises());
 	}
 
 	public String getDescription() {
@@ -47,11 +47,11 @@ public class WorkoutDTOGymMembership {
 		this.trainer = trainer;
 	}
 
-	public Set<Exercise> getExercises() {
+	public Set<ExerciseDTOResponse> getExercises() {
 		return exercises;
 	}
 
-	public void setExercises(Set<Exercise> exercises) {
+	public void setExercises(Set<ExerciseDTOResponse> exercises) {
 		this.exercises = exercises;
 	}
 	
