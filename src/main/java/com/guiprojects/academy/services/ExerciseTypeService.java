@@ -22,4 +22,13 @@ public class ExerciseTypeService {
 	public ExerciseType insert (ExerciseType exerciseType) {
 		return exerciseTypeRepository.save(exerciseType);
 	}
+	
+	public ExerciseType update(Long id, ExerciseType objWithNewParameters) {
+		ExerciseType exerciseTypeToUpdate = exerciseTypeRepository.findById(id).get();
+		
+		if(objWithNewParameters.getName() != null) exerciseTypeToUpdate.setName(objWithNewParameters.getName());	
+		if(objWithNewParameters.getMuscleGroup() != null) exerciseTypeToUpdate.setMuscleGroup(objWithNewParameters.getMuscleGroup());	
+		
+		return exerciseTypeRepository.save(exerciseTypeToUpdate);
+	}
 }
