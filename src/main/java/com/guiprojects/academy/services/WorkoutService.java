@@ -28,4 +28,12 @@ public class WorkoutService {
 		gymMembershipRepository.updateWorkout(obj.getId(), obj.getGymMembership().getId());
 		return obj;
 	}
+	
+	public Workout update(Long id, Workout objWithNewParameters) {
+		Workout workoutToUpdate = workoutRepository.findById(id).get();
+		
+		if(objWithNewParameters.getDescription() != null) workoutToUpdate.setDescription(objWithNewParameters.getDescription());		
+		
+		return workoutRepository.save(workoutToUpdate);
+	}
 }
