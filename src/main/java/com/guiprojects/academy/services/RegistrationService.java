@@ -29,7 +29,17 @@ public class RegistrationService {
 		return obj;	
 	}
 	
-	
+	public Registration update(Long id, Registration objWithNewParameters) {
+		Registration registrationToUpdate = registrationRepository.findById(id).get();
+		
+		if(objWithNewParameters.getRegistrationDate() != null) registrationToUpdate.setRegistrationDate(objWithNewParameters.getRegistrationDate());
+		if(objWithNewParameters.getMonthlyPeriod() != null) registrationToUpdate.setMonthlyPeriod(objWithNewParameters.getMonthlyPeriod());
+		if(objWithNewParameters.getPrice() != null) registrationToUpdate.setPrice(objWithNewParameters.getPrice());
+		if(objWithNewParameters.getInstallment() != null) registrationToUpdate.setInstallment(objWithNewParameters.getInstallment());
+		if(objWithNewParameters.getValid() != null) registrationToUpdate.setValid(objWithNewParameters.getValid());
+		
+		return registrationRepository.save(registrationToUpdate);
+	}
 	
 
 }
