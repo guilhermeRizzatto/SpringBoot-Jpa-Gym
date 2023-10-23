@@ -1,11 +1,7 @@
 package com.guiprojects.academy.entities;
 
 import java.io.Serializable;
-import java.util.Objects;
-
-import com.guiprojects.academy.dto.request.GymMembershipDTORequest;
-
-import jakarta.persistence.Entity;
+import java.util.Objects;Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;

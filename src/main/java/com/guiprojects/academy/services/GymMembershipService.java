@@ -27,4 +27,20 @@ public class GymMembershipService {
 		Optional<GymMembership> obj = membershipRepository.findFullById(id);
 		return obj.get();
 	}
+	
+	public GymMembership update(Long id, GymMembership objWithNewParameters) {
+		GymMembership memberToUpdate = membershipRepository.findById(id).get();
+		
+		if(objWithNewParameters.getName() != null) memberToUpdate.setName(objWithNewParameters.getName());
+		if(objWithNewParameters.getAge() != null) memberToUpdate.setAge(objWithNewParameters.getAge());
+		if(objWithNewParameters.getPhone() != null) memberToUpdate.setPhone(objWithNewParameters.getPhone());
+		if(objWithNewParameters.getWeight() != null) memberToUpdate.setWeight(objWithNewParameters.getWeight());
+		if(objWithNewParameters.getHeight() != null) memberToUpdate.setHeight(objWithNewParameters.getHeight());
+		
+		return membershipRepository.save(memberToUpdate);
+	}
+	
+	
+	
+	
 }
