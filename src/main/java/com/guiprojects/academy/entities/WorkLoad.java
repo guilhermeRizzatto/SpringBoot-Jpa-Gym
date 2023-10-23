@@ -51,7 +51,7 @@ public class WorkLoad implements Serializable{
 		this.id = id;
 		this.entryTime = entryTime;
 		this.departureTime = departureTime;
-		this.trainer = trainer;
+		this.trainer = trainer;		
 	}
 	
 	public WorkLoad(WorkLoadDTORequest obj) {
@@ -59,7 +59,7 @@ public class WorkLoad implements Serializable{
 		this.entryTime = obj.getEntryTime();
 		this.departureTime = obj.getDepartureTime();
 		this.trainer = obj.getTrainer();
-		this.days = addDays(obj.getDays());
+		addDays(obj.getDays());
 	}
 	
 	public Long getId() {
@@ -97,6 +97,7 @@ public class WorkLoad implements Serializable{
 	public Set<WeekDays> getDays() {
 		return days;
 	}
+	
 
 	@Override
 	public int hashCode() {
@@ -115,13 +116,33 @@ public class WorkLoad implements Serializable{
 		return Objects.equals(id, other.id);
 	}
 	
-	public Set<WeekDays> addDays(Set<WeekDays> daysDTO){
-		Set<WeekDays> days = new LinkedHashSet<>();
-		for(WeekDays x : daysDTO) {
+	public void addDays(Set<WeekDays> daysObj){
+		for(WeekDays x : daysObj) {
 			days.add(x);
-		}
-		return days;
+		}		
 	}
+	
+	public Set<WeekDays> deleteDays(Set<WeekDays> daysObj){
+		Set<WeekDays> daysToRemoveInDB = new LinkedHashSet<>();
+		
+		for(WeekDays x : days) {
+			int repetitions = 0;
+			for(WeekDays y : daysObj) {
+				if(x == y) {
+					repetitions += 1;
+				}
+			}
+			if(repetitions == 0) {
+				daysToRemoveInDB.add(x);
+			}
+		}
+		days.clear();
+		return daysToRemoveInDB; 	
+	}
+	
+	
+	
+	
 	
 	
 	
