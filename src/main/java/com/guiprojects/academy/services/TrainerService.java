@@ -29,4 +29,13 @@ public class TrainerService {
 	public Trainer insert (Trainer trainer) {
 		return trainerRepository.save(trainer);
 	}
+	
+	public Trainer update(Long id, Trainer objWithNewParameters) {
+		Trainer trainerToUpdate = trainerRepository.findById(id).get();
+		
+		if(objWithNewParameters.getName() != null) trainerToUpdate.setName(objWithNewParameters.getName());
+		if(objWithNewParameters.getEmail() != null) trainerToUpdate.setEmail(objWithNewParameters.getEmail());
+		
+		return trainerRepository.save(trainerToUpdate);
+	}
 }
