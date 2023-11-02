@@ -45,11 +45,12 @@ public class WorkLoadService {
 		return workLoadRepository.save(workLoadToUpdate);	
 	}
 	
+
 	private void deleteDaysInDB(Set<WeekDays> daysToDelete) {
 		for(WeekDays x : daysToDelete) {
 			workLoadRepository.deleteDaysAlreadyExists(x.toString());
-		}
-		
+		}	
 	}
+	
 
 }

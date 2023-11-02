@@ -23,4 +23,6 @@ public interface WorkLoadRepository extends JpaRepository<WorkLoad, Long>{
 			WHERE days = :day
 			""")
 	public void deleteDaysAlreadyExists(String day);
+	
+	
 }
