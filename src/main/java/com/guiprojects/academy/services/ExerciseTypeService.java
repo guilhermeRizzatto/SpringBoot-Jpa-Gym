@@ -31,4 +31,8 @@ public class ExerciseTypeService {
 		
 		return exerciseTypeRepository.save(exerciseTypeToUpdate);
 	}
+	
+	public void delete(Long id) {
+		exerciseTypeRepository.deleteById(id);
+	}
 }
