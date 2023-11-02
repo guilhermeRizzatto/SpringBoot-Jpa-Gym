@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import com.guiprojects.academy.dto.request.GymMembershipDTORequest;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,7 +28,7 @@ public class GymMembership implements Serializable{
 	private Double weight;
 	private Double height;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="registration_id")
 	private Registration registration;
 	

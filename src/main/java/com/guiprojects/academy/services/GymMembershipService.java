@@ -40,6 +40,10 @@ public class GymMembershipService {
 		return membershipRepository.save(memberToUpdate);
 	}
 	
+	public void delete(Long id) {
+		membershipRepository.deleteById(id);
+	}
+	
 	
 	
 	
