@@ -38,4 +38,8 @@ public class TrainerService {
 		
 		return trainerRepository.save(trainerToUpdate);
 	}
+	
+	public void delete(Long id) {
+		trainerRepository.deleteById(id);
+	}
 }
