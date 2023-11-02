@@ -32,5 +32,9 @@ public class ExerciseService {
 		
 		return exerciseRepository.save(exerciseToUpdate);	
 	}
+	
+	public void delete(Long workoutId, Long exerciseTypeId) {
+		exerciseRepository.deleteByIds(workoutId, exerciseTypeId);
+	}
 
 }
