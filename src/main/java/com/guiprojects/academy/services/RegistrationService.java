@@ -40,6 +40,6 @@ public class RegistrationService {
 		
 		return registrationRepository.save(registrationToUpdate);
 	}
-	
+
 
 }

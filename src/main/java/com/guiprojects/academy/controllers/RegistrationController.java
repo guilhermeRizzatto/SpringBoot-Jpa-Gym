@@ -42,4 +42,6 @@ public class RegistrationController {
 		RegistrationDTOResponse response = new RegistrationDTOResponse(registrationService.update(id, obj));
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
+	
+	
 }

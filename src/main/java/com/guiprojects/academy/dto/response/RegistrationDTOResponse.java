@@ -13,6 +13,7 @@ public class RegistrationDTOResponse {
 	private Double price;
 	private Integer installment;
 	private Boolean valid;
+	private Double installmentPrice;
 	private GymMembershipDTORegistration gymMembership;
 	
 	public RegistrationDTOResponse() {
@@ -24,6 +25,7 @@ public class RegistrationDTOResponse {
 		this.price = obj.getPrice();
 		this.installment = obj.getInstallment();
 		this.valid = obj.getValid();
+		this.installmentPrice = obj.getInstallmentPrice();
 		this.gymMembership = new GymMembershipDTORegistration(obj.getGymMembership());
 	}
 
@@ -65,6 +67,14 @@ public class RegistrationDTOResponse {
 
 	public void setValid(Boolean valid) {
 		this.valid = valid;
+	}
+	
+	public Double getInstallmentPrice() {
+		return installmentPrice;
+	}
+
+	public void setInstallmentPrice(Double installmentPrice) {
+		this.installmentPrice = installmentPrice;
 	}
 
 	public GymMembershipDTORegistration getGymMembership() {

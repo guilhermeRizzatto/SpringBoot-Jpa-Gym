@@ -104,6 +104,10 @@ public class Registration implements Serializable{
 		this.valid = valid;		
 	}
 	
+	public Double getInstallmentPrice() {
+		return installmentValues();
+	}
+
 	public GymMembership getGymMembership() {
 		return gymMembership;
 	}
@@ -127,6 +131,10 @@ public class Registration implements Serializable{
 			return false;
 		Registration other = (Registration) obj;
 		return Objects.equals(id, other.id);
+	}
+	
+	public Double installmentValues() {
+		return price / installment;
 	}
 	
 	
