@@ -8,6 +8,7 @@ import java.util.Set;
 import com.guiprojects.academy.dto.request.WorkoutDTORequestPOST;
 import com.guiprojects.academy.dto.response.ExerciseDTOResponse;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,7 +38,7 @@ public class Workout implements Serializable{
 	@JoinColumn(name="trainer_id")
 	private Trainer trainer;
 	
-	@OneToMany(mappedBy = "id.workout")
+	@OneToMany(mappedBy = "id.workout", cascade = CascadeType.ALL)
 	Set<Exercise> exercises = new LinkedHashSet<>();
 	
 	public Workout() {

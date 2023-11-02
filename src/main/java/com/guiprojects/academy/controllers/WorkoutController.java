@@ -3,6 +3,7 @@ package com.guiprojects.academy.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,13 +27,13 @@ public class WorkoutController {
 	
 	@GetMapping(value = "/base/{id}")
 	public ResponseEntity<WorkoutDTOResponseBASE> findById(@PathVariable Long id){
-		WorkoutDTOResponseBASE obj = new WorkoutDTOResponseBASE(workoutService.findById(id));
+		WorkoutDTOResponseBASE obj = new WorkoutDTOResponseBASE(workoutService.findBaseById(id));
 		return ResponseEntity.status(HttpStatus.OK).body(obj);
 	}
 	
 	@GetMapping(value = "/full/{id}")
 	public ResponseEntity<WorkoutDTOResponseFULL> findByIdFull(@PathVariable Long id){
-		WorkoutDTOResponseFULL obj = new WorkoutDTOResponseFULL(workoutService.findById(id));
+		WorkoutDTOResponseFULL obj = new WorkoutDTOResponseFULL(workoutService.findFullById(id));
 		return ResponseEntity.status(HttpStatus.OK).body(obj);
 	}
 	
@@ -49,6 +50,12 @@ public class WorkoutController {
 		Workout obj = new Workout(request);		
 		WorkoutDTOResponseBASE response = new WorkoutDTOResponseBASE(workoutService.update(id, obj));
 		return ResponseEntity.status(HttpStatus.OK).body(response);
+	}
+	
+	@DeleteMapping(value = "/delete/{id}")
+	public ResponseEntity<Void> delete(@PathVariable Long id){
+		workoutService.delete(id);
+		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 
 }
