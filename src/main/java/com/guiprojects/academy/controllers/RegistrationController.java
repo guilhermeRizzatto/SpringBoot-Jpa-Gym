@@ -38,7 +38,7 @@ public class RegistrationController {
 	
 	@PatchMapping(value = "/patch/{id}")
 	public ResponseEntity<RegistrationDTOResponse> update(@PathVariable Long id, @RequestBody RegistrationDTORequest registration){
-		Registration obj = new Registration(registration);		
+		Registration obj = Registration.auxiliary(registration);
 		RegistrationDTOResponse response = new RegistrationDTOResponse(registrationService.update(id, obj));
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}

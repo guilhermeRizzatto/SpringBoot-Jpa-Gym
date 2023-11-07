@@ -1,6 +1,6 @@
 package com.guiprojects.academy.dto.response;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import com.guiprojects.academy.dtoAuxiliary.GymMembershipDTORegistration;
 import com.guiprojects.academy.entities.GymMembership;
@@ -8,7 +8,7 @@ import com.guiprojects.academy.entities.Registration;
 
 public class RegistrationDTOResponse {
 
-	private LocalDateTime registrationDate;
+	private LocalDate registrationDate;
 	private Integer monthlyPeriod;
 	private Double price;
 	private Integer installment;
@@ -29,11 +29,11 @@ public class RegistrationDTOResponse {
 		this.gymMembership = new GymMembershipDTORegistration(obj.getGymMembership());
 	}
 
-	public LocalDateTime getRegistrationDate() {
+	public LocalDate getRegistrationDate() {
 		return registrationDate;
 	}
 
-	public void setRegistrationDate(LocalDateTime registrationDate) {
+	public void setRegistrationDate(LocalDate registrationDate) {
 		this.registrationDate = registrationDate;
 	}
 
@@ -65,8 +65,8 @@ public class RegistrationDTOResponse {
 		return valid;
 	}
 
-	public void setValid(Boolean valid) {
-		this.valid = valid;
+	public void setValid(Registration obj) {
+		this.valid = obj.getValid();
 	}
 	
 	public Double getInstallmentPrice() {

@@ -36,7 +36,8 @@ public class RegistrationService {
 		if(objWithNewParameters.getMonthlyPeriod() != null) registrationToUpdate.setMonthlyPeriod(objWithNewParameters.getMonthlyPeriod());
 		if(objWithNewParameters.getPrice() != null) registrationToUpdate.setPrice(objWithNewParameters.getPrice());
 		if(objWithNewParameters.getInstallment() != null) registrationToUpdate.setInstallment(objWithNewParameters.getInstallment());
-		if(objWithNewParameters.getValid() != null) registrationToUpdate.setValid(objWithNewParameters.getValid());
+		
+		registrationToUpdate.setValid();
 		
 		return registrationRepository.save(registrationToUpdate);
 	}
