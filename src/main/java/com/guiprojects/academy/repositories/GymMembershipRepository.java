@@ -36,4 +36,14 @@ public interface GymMembershipRepository extends JpaRepository<GymMembership, Lo
 			+ "WHERE obj.id = ?1")
 	public Optional<GymMembership> findFullById(Long id);
 	
+	@Transactional
+	@Modifying
+	@Query(nativeQuery = true, value = """			
+			UPDATE gym_membership
+			SET workout_id = NULL
+			WHERE id = :memberId
+			""")
+	public void deleteWorkoutAssociated(Long memberId);
+	
+	
 }

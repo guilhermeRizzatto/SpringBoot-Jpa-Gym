@@ -22,5 +22,19 @@ public class ExerciseService {
 	public Exercise insert (Exercise exercise) {
 		return exerciseRepository.save(exercise);
 	}
+	
+	public Exercise update(Long workoutId, Long exerciseTypeId, Exercise objWithNewParameters) {
+		Exercise exerciseToUpdate = exerciseRepository.findByIds(workoutId, exerciseTypeId).get();
+		
+		if(objWithNewParameters.getSets() != null) exerciseToUpdate.setSets(objWithNewParameters.getSets());
+		if(objWithNewParameters.getReps() != null) exerciseToUpdate.setReps(objWithNewParameters.getReps());
+		if(objWithNewParameters.getIntervalSeconds() != null) exerciseToUpdate.setIntervalSeconds(objWithNewParameters.getIntervalSeconds());
+		
+		return exerciseRepository.save(exerciseToUpdate);	
+	}
+	
+	public void delete(Long workoutId, Long exerciseTypeId) {
+		exerciseRepository.deleteByIds(workoutId, exerciseTypeId);
+	}
 
 }

@@ -8,6 +8,7 @@ import java.util.Set;
 import com.guiprojects.academy.dto.request.TrainerDTORequest;
 import com.guiprojects.academy.dtoAuxiliary.WorkoutDTOTrainer;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,7 +28,7 @@ public class Trainer implements Serializable{
 	private String name;
 	private String email;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="workLoad_id")
 	private WorkLoad workLoad;
 	

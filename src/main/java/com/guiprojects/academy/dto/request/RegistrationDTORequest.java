@@ -1,6 +1,6 @@
 package com.guiprojects.academy.dto.request;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 
 import com.guiprojects.academy.entities.GymMembership;
@@ -9,23 +9,21 @@ import com.guiprojects.academy.entities.GymMembership;
 public class RegistrationDTORequest {
 	
 	private Long id;
-	private LocalDateTime registrationDate;
+	private LocalDate registrationDate;
 	private Integer monthlyPeriod;
 	private Double price;
 	private Integer installment;
-	private Boolean valid;
 	private GymMembership gymMembership;
 	
 	public RegistrationDTORequest() {
 	}
 	
-	public RegistrationDTORequest(Long id, LocalDateTime registrationDate, Integer monthlyPeriod, Double price,Integer installment, Boolean valid, GymMembership gymMembership) {
+	public RegistrationDTORequest(Long id, LocalDate registrationDate, Integer monthlyPeriod, Double price,Integer installment, GymMembership gymMembership) {
 		this.id = id;
 		this.registrationDate = registrationDate;
 		this.monthlyPeriod = monthlyPeriod;
 		this.price = price;
 		this.installment = installment;
-		this.valid = valid;
 		this.gymMembership = gymMembership;
 	}
 
@@ -37,11 +35,11 @@ public class RegistrationDTORequest {
 		this.id = id;
 	}
 
-	public LocalDateTime getRegistrationDate() {
+	public LocalDate getRegistrationDate() {
 		return registrationDate;
 	}
 
-	public void setRegistrationDate(LocalDateTime registrationDate) {
+	public void setRegistrationDate(LocalDate registrationDate) {
 		this.registrationDate = registrationDate;
 	}
 
@@ -67,14 +65,6 @@ public class RegistrationDTORequest {
 
 	public void setInstallment(Integer installment) {
 		this.installment = installment;
-	}
-
-	public Boolean getValid() {
-		return valid;
-	}
-
-	public void setValid(Boolean valid) {
-		this.valid = valid;
 	}
 
 	public GymMembership getGymMembership() {

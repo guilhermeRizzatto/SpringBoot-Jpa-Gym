@@ -18,8 +18,13 @@ public class WorkoutService {
 	@Autowired
 	private GymMembershipRepository gymMembershipRepository;
 	
-	public Workout findById (Long id) {
-		Optional<Workout> obj = workoutRepository.findWorkoutById(id);
+	public Workout findFullById (Long id) {
+		Optional<Workout> obj = workoutRepository.findWorkoutFullById(id);
+		return obj.get();
+	}
+	
+	public Workout findBaseById (Long id) {
+		Optional<Workout> obj = workoutRepository.findWorkoutBaseById(id);
 		return obj.get();
 	}
 	
@@ -27,5 +32,19 @@ public class WorkoutService {
 		Workout obj = workoutRepository.save(workout);
 		gymMembershipRepository.updateWorkout(obj.getId(), obj.getGymMembership().getId());
 		return obj;
+	}
+	
+	public Workout update(Long id, Workout objWithNewParameters) {
+		Workout workoutToUpdate = workoutRepository.findById(id).get();
+		
+		if(objWithNewParameters.getDescription() != null) workoutToUpdate.setDescription(objWithNewParameters.getDescription());		
+		
+		return workoutRepository.save(workoutToUpdate);
+	}
+	
+	public void delete(Long id) {
+		Workout obj = workoutRepository.findWorkoutBaseById(id).get();
+		gymMembershipRepository.deleteWorkoutAssociated(obj.getGymMembership().getId());
+		workoutRepository.deleteById(id);
 	}
 }

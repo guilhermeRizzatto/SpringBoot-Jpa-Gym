@@ -1,7 +1,7 @@
 package com.guiprojects.academy.entities;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 
 import com.guiprojects.academy.dto.request.RegistrationDTORequest;
@@ -22,7 +22,7 @@ public class Registration implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private LocalDateTime registrationDate;
+	private LocalDate registrationDate;
 	private Integer monthlyPeriod;
 	private Double price;
 	private Integer installment;
@@ -35,14 +35,14 @@ public class Registration implements Serializable{
 	public Registration() {
 	}
 
-	public Registration(Long id, LocalDateTime registrationDate, Integer monthlyPeriod, Double price, Integer installment, Boolean valid, GymMembership gymMembership) {
+	public Registration(Long id, LocalDate registrationDate, Integer monthlyPeriod, Double price, Integer installment, GymMembership gymMembership) {
 		super();
 		this.id = id;
 		this.registrationDate = registrationDate;
 		this.monthlyPeriod = monthlyPeriod;
 		this.price = price;
 		this.installment = installment;
-		this.valid = valid;
+		this.valid = isValid();
 		this.gymMembership = gymMembership;
 	}
 	
@@ -52,7 +52,7 @@ public class Registration implements Serializable{
 		this.monthlyPeriod = request.getMonthlyPeriod();
 		this.price = request.getPrice();
 		this.installment = request.getInstallment();
-		this.valid = request.getValid();
+		this.valid = isValid();
 		this.gymMembership = request.getGymMembership();
 	}
 
@@ -64,11 +64,11 @@ public class Registration implements Serializable{
 		this.id = id;
 	}
 
-	public LocalDateTime getRegistrationDate() {
+	public LocalDate getRegistrationDate() {
 		return registrationDate;
 	}
 
-	public void setRegistrationDate(LocalDateTime registrationDate) {
+	public void setRegistrationDate(LocalDate registrationDate) {
 		this.registrationDate = registrationDate;
 	}
 
@@ -99,11 +99,15 @@ public class Registration implements Serializable{
 	public Boolean getValid() {
 		return valid;
 	}
-
-	public void setValid(Boolean valid) {
-		this.valid = valid;		
-	}
 	
+	public void setValid() {
+		this.valid = isValid();
+	}
+
+	public Double getInstallmentPrice() {
+		return installmentValues();
+	}
+
 	public GymMembership getGymMembership() {
 		return gymMembership;
 	}
@@ -129,6 +133,30 @@ public class Registration implements Serializable{
 		return Objects.equals(id, other.id);
 	}
 	
+	public Double installmentValues() {
+		return price / installment;
+	}
+	
+	public Boolean isValid() {
+		LocalDate now = LocalDate.now();
+		LocalDate expiryDate = registrationDate.plusMonths(monthlyPeriod.longValue());
+		
+		return expiryDate.isAfter(now) == true || expiryDate.isEqual(now) == true;
+	}
+	
+	//constructor auxiliary, only used for Patch Method in RegistrationsController to evite conflicts with isValid()
+	public static Registration auxiliary(RegistrationDTORequest request) {
+		Registration obj = new Registration();
+		
+		obj.setId(request.getId());
+		obj.setRegistrationDate(request.getRegistrationDate());
+		obj.setMonthlyPeriod(request.getMonthlyPeriod());
+		obj.setPrice(request.getPrice());
+		obj.setInstallment(request.getInstallment());
+		obj.setGymMembership(request.getGymMembership());
+		
+		return obj;
+	}
 	
 	
 
