@@ -14,10 +14,11 @@ All the Classes you can **ADD, GET, UPDATE, and DELETE**, less the *Registration
 * Implements GET ALL in all Classes with a Pagination system.<br>
 * Deploy the DataBase, maybe in PlanetScale.<br>
 * Deploy the program in any cloud system, for example AWS.<br>
-* Refactor some parts of code, to made it more clean to read.<br>
+* Refactor some parts of the code, to make it more clean to read.<br>
+* Exceptions Handling
 
 **CHALLENGINGS I HAVE FOUNDED DURING DEVELOPMENT:<br>**
-* I used the option : jpa-open-in-view = false, this made my development very hard to get the entities with your association, and the way I decided to solve this, is to make **JPQL** and **Native SQL** queries in each Classes Repositories. It is not the best and prettiest code to read, but it works and I want to improve this code in the future.<br>
+* I used the option: jpa-open-in-view = false, this made my development very hard to get the entities with your association, and the way I decided to solve this, is to make **JPQL** and **Native SQL** queries in each Classes Repositories. It is not the best and prettiest code to read, but it works and I want to improve this code in the future.<br>
 * Made a DataBase in a Virtual Machine (Oracle Linux) and connect the program because don't they teach us how to connect in a database that is not on your localHost.I never do it before, so it was challenging for me.<br>
 * Making the diagram of the Classes,is difficult but I learned a lot from it, because it makes me think more about in program structure and how the classes would connect.<br>
 -------------------------------------------------------------------
