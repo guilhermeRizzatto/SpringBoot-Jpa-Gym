@@ -11,11 +11,11 @@ And there exists a *Workout* that connects them (*GymMembership* and the *traine
 All the Classes you can **ADD, GET, UPDATE, and DELETE**, less the *Registration* and *WorkLoad* which are deleted together with *GymMembership(to Registration)* or *Trainer(to WorkLoad)*.
 
 **UPDATES I WANT TO DO IN THIS PROGRAM:<br>**
-* Implements GET ALL in all Classes with a Pagination system.<br>
-* Deploy the DataBase, maybe in PlanetScale.<br>
-* Deploy the program in any cloud system, for example AWS.<br>
-* Refactor some parts of the code, to make it more clean to read.<br>
-* Exceptions Handling
+- [ ] Implements GET ALL in all Classes with a Pagination system.<br>
+- [ ] Deploy the DataBase, maybe in PlanetScale.<br>
+- [ ] Deploy the program in any cloud system, for example AWS.<br>
+- [ ] Refactor some parts of the code, to make it more clean to read.<br>
+- [ ] Exceptions Handling
 
 **CHALLENGINGS I HAVE FOUNDED DURING DEVELOPMENT:<br>**
 * I used the option: jpa-open-in-view = false, this made my development very hard to get the entities with your association, and the way I decided to solve this, is to make **JPQL** and **Native SQL** queries in each Classes Repositories. It is not the best and prettiest code to read, but it works and I want to improve this code in the future.<br>
