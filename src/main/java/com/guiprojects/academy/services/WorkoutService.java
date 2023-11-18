@@ -3,11 +3,14 @@ package com.guiprojects.academy.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.guiprojects.academy.entities.Workout;
 import com.guiprojects.academy.repositories.GymMembershipRepository;
 import com.guiprojects.academy.repositories.WorkoutRepository;
+import com.guiprojects.academy.services.exceptions.DataBaseException;
+import com.guiprojects.academy.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class WorkoutService {
@@ -20,22 +23,26 @@ public class WorkoutService {
 	
 	public Workout findFullById (Long id) {
 		Optional<Workout> obj = workoutRepository.findWorkoutFullById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
 	public Workout findBaseById (Long id) {
 		Optional<Workout> obj = workoutRepository.findWorkoutBaseById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
 	public Workout insert (Workout workout) {
+		try {
 		Workout obj = workoutRepository.save(workout);
 		gymMembershipRepository.updateWorkout(obj.getId(), obj.getGymMembership().getId());
 		return obj;
+		} catch (DataIntegrityViolationException e) {
+			throw new DataBaseException(e.getMessage());
+		}
 	}
 	
 	public Workout update(Long id, Workout objWithNewParameters) {
-		Workout workoutToUpdate = workoutRepository.findById(id).get();
+		Workout workoutToUpdate = workoutRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
 		
 		if(objWithNewParameters.getDescription() != null) workoutToUpdate.setDescription(objWithNewParameters.getDescription());		
 		
@@ -43,8 +50,15 @@ public class WorkoutService {
 	}
 	
 	public void delete(Long id) {
-		Workout obj = workoutRepository.findWorkoutBaseById(id).get();
-		gymMembershipRepository.deleteWorkoutAssociated(obj.getGymMembership().getId());
-		workoutRepository.deleteById(id);
+		try {
+		if(workoutRepository.existsById(id)) {
+			Workout obj = workoutRepository.findWorkoutBaseById(id).orElseThrow(() -> new ResourceNotFoundException(id));
+			gymMembershipRepository.deleteWorkoutAssociated(obj.getGymMembership().getId());
+			workoutRepository.deleteById(id);
+			} else throw new ResourceNotFoundException(id);	 	
+		} catch (DataIntegrityViolationException e) {
+			throw new DataBaseException(e.getMessage());
+		}
 	}
+	
 }
