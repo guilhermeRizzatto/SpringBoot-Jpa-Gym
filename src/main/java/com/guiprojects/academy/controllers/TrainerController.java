@@ -1,7 +1,5 @@
 package com.guiprojects.academy.controllers;
 
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,9 +33,9 @@ public class TrainerController {
 	}
 	
 	@GetMapping(value = "/full/{id}")
-	public ResponseEntity<Set<TrainerDTOResponse>> findByIdFull(@PathVariable Long id){
-		Set<TrainerDTOResponse> list = TrainerDTOResponse.createExercises(trainerService.findFullById(id));
-		return ResponseEntity.ok().body(list);
+	public ResponseEntity<TrainerDTOResponse> findByIdFull(@PathVariable Long id){
+		TrainerDTOResponse obj = TrainerDTOResponse.createExercises(trainerService.findFullById(id));
+		return ResponseEntity.ok().body(obj);
 	}
 	
 	@PostMapping
