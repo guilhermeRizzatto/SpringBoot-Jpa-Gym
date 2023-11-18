@@ -9,6 +9,7 @@ import com.guiprojects.academy.entities.enums.WeekDays;
 
 public class WorkLoadDTOResponse {
 	
+	private Long id;
 	private LocalTime entryTime;
 	private LocalTime departureTime;
 	
@@ -24,6 +25,15 @@ public class WorkLoadDTOResponse {
 		this.departureTime = obj.getDepartureTime();
 		this.trainer = new TrainerDTO(obj.getTrainer());
 		this.days = obj.getDays();
+		this.id = obj.getId();
+	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public LocalTime getEntryTime() {

@@ -11,7 +11,7 @@ import com.guiprojects.academy.entities.enums.WeekDays;
 //Contain only informations necessary for Trainer
 public class WorkLoadDTO {
 	
-		
+	private Long id;
 	private LocalTime entryTime;
 	private LocalTime departureTime;
 	
@@ -24,12 +24,22 @@ public class WorkLoadDTO {
 		this.entryTime = entryTime;
 		this.departureTime = departureTime;		
 		this.days = days;
+		this.id = id;
 	}
 	
 	public WorkLoadDTO(WorkLoad obj) {
 		this.entryTime = obj.getEntryTime();
 		this.departureTime = obj.getDepartureTime();
 		this.days = obj.getDays();
+		this.id = obj.getId();
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public LocalTime getEntryTime() {
