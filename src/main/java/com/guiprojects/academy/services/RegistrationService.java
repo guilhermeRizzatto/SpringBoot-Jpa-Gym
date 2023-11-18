@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.guiprojects.academy.entities.Registration;
 import com.guiprojects.academy.repositories.GymMembershipRepository;
 import com.guiprojects.academy.repositories.RegistrationRepository;
+import com.guiprojects.academy.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class RegistrationService {
@@ -20,7 +21,7 @@ public class RegistrationService {
 	
 	public Registration findById(Long id) {
 		Optional<Registration> obj = registrationRepository.findById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
 	public Registration insert (Registration registration) {
@@ -30,7 +31,7 @@ public class RegistrationService {
 	}
 	
 	public Registration update(Long id, Registration objWithNewParameters) {
-		Registration registrationToUpdate = registrationRepository.findById(id).get();
+		Registration registrationToUpdate = registrationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
 		
 		if(objWithNewParameters.getRegistrationDate() != null) registrationToUpdate.setRegistrationDate(objWithNewParameters.getRegistrationDate());
 		if(objWithNewParameters.getMonthlyPeriod() != null) registrationToUpdate.setMonthlyPeriod(objWithNewParameters.getMonthlyPeriod());
