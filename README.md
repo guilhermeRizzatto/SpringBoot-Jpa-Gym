@@ -15,7 +15,7 @@ All the Classes you can **ADD, GET, UPDATE, and DELETE**, less the *Registration
 - [ ] Deploy the DataBase, maybe in PlanetScale.<br>
 - [ ] Deploy the program in any cloud system, for example AWS.<br>
 - [ ] Refactor some parts of the code, to make it more clean to read.<br>
-- [ ] Exceptions Handling
+- [x] Exceptions Handling
 
 **CHALLENGINGS I HAVE FOUNDED DURING DEVELOPMENT:<br>**
 * I used the option: jpa-open-in-view = false, this made my development very hard to get the entities with your association, and the way I decided to solve this, is to make **JPQL** and **Native SQL** queries in each Classes Repositories. It is not the best and prettiest code to read, but it works and I want to improve this code in the future.<br>
