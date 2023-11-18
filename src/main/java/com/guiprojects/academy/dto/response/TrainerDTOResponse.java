@@ -1,6 +1,5 @@
 package com.guiprojects.academy.dto.response;
 
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 import com.guiprojects.academy.dtoAuxiliary.WorkLoadDTO;
@@ -9,6 +8,7 @@ import com.guiprojects.academy.entities.Trainer;
 
 public class TrainerDTOResponse {
 	
+	private Long id;
 	private String name;
 	private String email;
 	
@@ -24,6 +24,15 @@ public class TrainerDTOResponse {
 		this.email = obj.getEmail();
 		this.workLoad = new WorkLoadDTO(obj.getWorkLoad());
 		this.workouts = obj.addWorkouts(obj.getWorkouts());
+		this.id = obj.getId();
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -58,21 +67,16 @@ public class TrainerDTOResponse {
 		this.workouts = workouts;
 	}
 	
-	public static Set<TrainerDTOResponse> createExercises (Set<Trainer> list) {
-		Set<TrainerDTOResponse> trainers = new LinkedHashSet<>();
-		
-		for(Trainer x : list) {
-			TrainerDTOResponse trainer = new TrainerDTOResponse();
+	public static TrainerDTOResponse createExercises (Trainer trainer) {		
+		TrainerDTOResponse obj = new TrainerDTOResponse();
 			
-			trainer.setEmail(x.getEmail());
-			trainer.setName(x.getName()); 
-			trainer.setWorkLoad(new WorkLoadDTO(x.getWorkLoad())); 
-			trainer.setWorkouts(x.addWorkouts(x.getWorkouts())); 
-			
-			trainers.add(trainer);
-		}
+		obj.setEmail(trainer.getEmail());
+		obj.setName(trainer.getName()); 
+		obj.setWorkLoad(new WorkLoadDTO(trainer.getWorkLoad())); 
+		obj.setWorkouts(trainer.addWorkouts(trainer.getWorkouts())); 
+		obj.setId(trainer.getId());
 		
-		return trainers;
+		return obj;
 	}
 
 	

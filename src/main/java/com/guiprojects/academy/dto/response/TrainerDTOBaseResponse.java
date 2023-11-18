@@ -6,6 +6,7 @@ import com.guiprojects.academy.entities.Trainer;
 
 public class TrainerDTOBaseResponse {
 	
+	private Long id;
 	private String name;
 	private String email;
 
@@ -14,7 +15,16 @@ public class TrainerDTOBaseResponse {
 	
 	public TrainerDTOBaseResponse(Trainer obj) {
 		this.name = obj.getName();
-		this.email = obj.getEmail();		
+		this.email = obj.getEmail();	
+		this.id = obj.getId();
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {

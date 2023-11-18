@@ -1,13 +1,16 @@
 package com.guiprojects.academy.services;
 
 import java.util.Optional;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.guiprojects.academy.entities.Trainer;
 import com.guiprojects.academy.repositories.TrainerRepository;
+import com.guiprojects.academy.services.exceptions.DataBaseException;
+import com.guiprojects.academy.services.exceptions.ResourceNotFoundException;
+import com.guiprojects.academy.services.exceptions.TrainerWorkLoadException;
 
 @Service
 public class TrainerService {
@@ -18,12 +21,15 @@ public class TrainerService {
 	
 	public Trainer findById (Long id) {
 		Optional<Trainer> obj = trainerRepository.findById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
-	public Set<Trainer> findFullById (Long id) {
-		Set<Trainer> list = trainerRepository.findFullById(id);
-		return list;
+	public Trainer findFullById (Long id) {
+		Optional<Trainer> obj = trainerRepository.findFullById(id);
+		Trainer trainer = obj.orElseThrow(() -> new ResourceNotFoundException(id));
+		if(trainer.getWorkLoad() == null) throw new TrainerWorkLoadException("Trainer workLoad is empty");
+		return trainer;
+		
 	}
 	
 	public Trainer insert (Trainer trainer) {
@@ -31,7 +37,7 @@ public class TrainerService {
 	}
 	
 	public Trainer update(Long id, Trainer objWithNewParameters) {
-		Trainer trainerToUpdate = trainerRepository.findById(id).get();
+		Trainer trainerToUpdate = trainerRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
 		
 		if(objWithNewParameters.getName() != null) trainerToUpdate.setName(objWithNewParameters.getName());
 		if(objWithNewParameters.getEmail() != null) trainerToUpdate.setEmail(objWithNewParameters.getEmail());
@@ -40,6 +46,13 @@ public class TrainerService {
 	}
 	
 	public void delete(Long id) {
-		trainerRepository.deleteById(id);
+		try {
+			if(trainerRepository.existsById(id)) {
+				trainerRepository.deleteById(id);
+				} else throw new ResourceNotFoundException(id);		 	
+		} catch (DataIntegrityViolationException e) {
+			throw new DataBaseException(e.getMessage());
+		}
 	}
+	
 }
