@@ -10,6 +10,7 @@ import com.guiprojects.academy.entities.WorkLoad;
 import com.guiprojects.academy.entities.enums.WeekDays;
 import com.guiprojects.academy.repositories.TrainerRepository;
 import com.guiprojects.academy.repositories.WorkLoadRepository;
+import com.guiprojects.academy.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class WorkLoadService {
@@ -22,7 +23,7 @@ public class WorkLoadService {
 	
 	public WorkLoad findById (Long id) {
 		Optional<WorkLoad> obj = workLoadRepository.findWorkLoadById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
 	public WorkLoad insert (WorkLoad workLoad) {
@@ -32,7 +33,7 @@ public class WorkLoadService {
 	}
 	
 	public WorkLoad update(Long id, WorkLoad objWithNewParameters) {
-		WorkLoad workLoadToUpdate = workLoadRepository.findWorkLoadById(id).get();
+		WorkLoad workLoadToUpdate = workLoadRepository.findWorkLoadById(id).orElseThrow(() -> new ResourceNotFoundException(id));
 		
 		if(objWithNewParameters.getEntryTime() != null) workLoadToUpdate.setEntryTime(objWithNewParameters.getEntryTime());
 		if(objWithNewParameters.getDepartureTime() != null) workLoadToUpdate.setDepartureTime(objWithNewParameters.getDepartureTime());
