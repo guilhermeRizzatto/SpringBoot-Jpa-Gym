@@ -9,6 +9,7 @@ import com.guiprojects.academy.entities.Workout;
 //Only use when need the Exercises
 public class WorkoutDTOResponseFULL {
 	
+	private Long id;
 	private String description;
 	private GymMembershipDTOWorkout gymMembership;
 	
@@ -24,6 +25,15 @@ public class WorkoutDTOResponseFULL {
 		this.gymMembership = new GymMembershipDTOWorkout(obj.getGymMembership());
 		this.trainer = new TrainerDTO(obj.getTrainer());
 		this.exercises = ExerciseDTOResponse.createExercises(obj.getExercises());
+		this.id = obj.getId();
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getDescription() {

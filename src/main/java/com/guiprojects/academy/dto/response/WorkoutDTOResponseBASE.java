@@ -7,6 +7,7 @@ import com.guiprojects.academy.entities.Workout;
 //Only use when don't need the Exercises
 public class WorkoutDTOResponseBASE {
 	
+	private Long id;
 	private String description;
 	private GymMembershipDTOWorkout gymMembership;
 	
@@ -20,6 +21,15 @@ public class WorkoutDTOResponseBASE {
 		this.description = obj.getDescription();
 		this.gymMembership = new GymMembershipDTOWorkout(obj.getGymMembership());
 		this.trainer = new TrainerDTO(obj.getTrainer());
+		this.id = obj.getId();
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getDescription() {

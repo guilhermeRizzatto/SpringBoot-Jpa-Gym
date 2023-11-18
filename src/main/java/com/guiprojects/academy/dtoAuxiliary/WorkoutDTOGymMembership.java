@@ -9,6 +9,7 @@ import com.guiprojects.academy.entities.Workout;
 //Contain only informations necessary for GymMembership
 public class WorkoutDTOGymMembership {
 	
+	private Long id;
 	private String description;
 	
 	private TrainerDTO trainer;
@@ -18,10 +19,11 @@ public class WorkoutDTOGymMembership {
 	public WorkoutDTOGymMembership() {
 	}
 
-	public WorkoutDTOGymMembership(String description, TrainerDTO trainer, Set<ExerciseDTOResponse> exercises) {
+	public WorkoutDTOGymMembership(Long id, String description, TrainerDTO trainer, Set<ExerciseDTOResponse> exercises) {
 		this.description = description;
 		this.trainer = trainer;
 		this.exercises = exercises;
+		this.id = id;
 	}
 
 	public WorkoutDTOGymMembership(Workout obj) {
@@ -29,6 +31,15 @@ public class WorkoutDTOGymMembership {
 		this.description = obj.getDescription();
 		this.trainer = new TrainerDTO(obj.getTrainer());
 		this.exercises = ExerciseDTOResponse.createExercises(obj.getExercises());
+		obj.getId();
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getDescription() {
