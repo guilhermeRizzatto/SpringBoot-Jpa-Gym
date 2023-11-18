@@ -1,6 +1,6 @@
 package com.guiprojects.academy.repositories;
 
-import java.util.Set;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -22,11 +22,11 @@ public interface TrainerRepository extends JpaRepository<Trainer, Long>{
 	public void updateWorkLoad(Long workLoadId, Long trainerId);
 	
 	
-	@Query("SELECT obj, w.description, w.gymMembership "
+	@Query("SELECT obj "
 			+ "FROM Trainer obj "
-			+ "JOIN FETCH obj.workouts w "
-			+ "JOIN FETCH obj.workLoad wK "
-			+ "JOIN FETCH wK.days "
+			+ "LEFT JOIN FETCH obj.workouts w "
+			+ "LEFT JOIN FETCH obj.workLoad wK "
+			+ "LEFT JOIN FETCH wK.days "
 			+ "WHERE obj.id = ?1")
-	public Set<Trainer> findFullById(Long id); 
+	public Optional<Trainer> findFullById(Long id); 
 }
