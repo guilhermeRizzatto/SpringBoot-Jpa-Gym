@@ -3,10 +3,13 @@ package com.guiprojects.academy.services;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.guiprojects.academy.entities.Exercise;
 import com.guiprojects.academy.repositories.ExerciseRepository;
+import com.guiprojects.academy.services.exceptions.DataBaseException;
+import com.guiprojects.academy.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class ExerciseService {
@@ -20,11 +23,15 @@ public class ExerciseService {
 	}
 	
 	public Exercise insert (Exercise exercise) {
+		try {
 		return exerciseRepository.save(exercise);
+		} catch (DataIntegrityViolationException e) {
+			throw new DataBaseException(e.getMessage());
+		}
 	}
 	
 	public Exercise update(Long workoutId, Long exerciseTypeId, Exercise objWithNewParameters) {
-		Exercise exerciseToUpdate = exerciseRepository.findByIds(workoutId, exerciseTypeId).get();
+		Exercise exerciseToUpdate = exerciseRepository.findByIds(workoutId, exerciseTypeId).orElseThrow(() -> new ResourceNotFoundException("Not exist any exercise with this workoutId: " + workoutId + " and this exerciseTypeId: " + exerciseTypeId));;
 		
 		if(objWithNewParameters.getSets() != null) exerciseToUpdate.setSets(objWithNewParameters.getSets());
 		if(objWithNewParameters.getReps() != null) exerciseToUpdate.setReps(objWithNewParameters.getReps());
@@ -34,7 +41,7 @@ public class ExerciseService {
 	}
 	
 	public void delete(Long workoutId, Long exerciseTypeId) {
-		exerciseRepository.deleteByIds(workoutId, exerciseTypeId);
+		if(exerciseRepository.deleteByIds(workoutId, exerciseTypeId) == 0) throw new ResourceNotFoundException("Not exist any exercise with this workoutId: " + workoutId + " and this exerciseTypeId: " + exerciseTypeId);
 	}
 
 }
