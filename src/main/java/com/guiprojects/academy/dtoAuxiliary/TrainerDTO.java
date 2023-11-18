@@ -6,20 +6,31 @@ import com.guiprojects.academy.entities.Trainer;
 //Contain only informations necessary for Workout and WorkLoad
 public class TrainerDTO {
 	
+	private Long id;
 	private String name;
 	private String email;
 	
 	public TrainerDTO() {
 	}
 
-	public TrainerDTO(String name, String email) {
+	public TrainerDTO(Long id, String name, String email) {
 		this.name = name;
 		this.email = email;
+		this.id = id;
 	}
 
 	public TrainerDTO(Trainer obj) {
 		this.name = obj.getName();
 		this.email = obj.getEmail();
+		this.id = obj.getId();
+	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {
