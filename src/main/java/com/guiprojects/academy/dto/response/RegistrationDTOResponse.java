@@ -8,6 +8,7 @@ import com.guiprojects.academy.entities.Registration;
 
 public class RegistrationDTOResponse {
 
+	private Long id;
 	private LocalDate registrationDate;
 	private Integer monthlyPeriod;
 	private Double price;
@@ -27,6 +28,15 @@ public class RegistrationDTOResponse {
 		this.valid = obj.getValid();
 		this.installmentPrice = obj.getInstallmentPrice();
 		this.gymMembership = new GymMembershipDTORegistration(obj.getGymMembership());
+		this.id = obj.getId();
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public LocalDate getRegistrationDate() {
