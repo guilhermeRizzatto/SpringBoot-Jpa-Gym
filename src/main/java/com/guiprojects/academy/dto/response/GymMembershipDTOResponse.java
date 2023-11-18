@@ -6,6 +6,7 @@ import com.guiprojects.academy.entities.GymMembership;
 
 public class GymMembershipDTOResponse {
 
+	private Long id;
 	private String name;
 	private String phone;
 	private Integer age;
@@ -24,6 +25,15 @@ public class GymMembershipDTOResponse {
 		this.weight = obj.getWeight();
 		this.height = obj.getHeight();		
 		this.workout = new WorkoutDTOGymMembership(obj.getWorkout());
+		this.id = obj.getId();
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {
