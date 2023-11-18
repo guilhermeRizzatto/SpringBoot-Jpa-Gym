@@ -33,5 +33,5 @@ public interface ExerciseRepository extends JpaRepository<Exercise, Long>{
 			WHERE workout_id = :workoutId
 			AND exercise_type_id = :exerciseTypeId	
 			""")
-	public void deleteByIds(Long workoutId, Long exerciseTypeId);
+	public int deleteByIds(Long workoutId, Long exerciseTypeId);
 }
