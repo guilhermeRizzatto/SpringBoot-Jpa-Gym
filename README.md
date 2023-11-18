@@ -35,6 +35,7 @@ Follow the diagram of the classes below:
 <p>JPA</p>
 <p>Postgres SQL</p>
 <p>ORACLE Linux (used to host the test database)</p>
+<p>SupaBase to host Postgres Database</p>
 ------------------------------------------------------------------- <br>
 <p>🔧 Tools used: </p>
 <p>Spring Tool Suite 4</p>
