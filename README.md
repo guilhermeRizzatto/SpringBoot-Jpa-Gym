@@ -12,7 +12,7 @@ All the Classes you can **ADD, GET, UPDATE, and DELETE**, less the *Registration
 
 **UPDATES I WANT TO DO IN THIS PROGRAM:<br>**
 - [ ] Implements GET ALL in all Classes with a Pagination system.<br>
-- [ ] Deploy the DataBase, maybe in PlanetScale.<br>
+- [ ] Deploy the DataBase<br>
 - [ ] Deploy the program in any cloud system, for example AWS.<br>
 - [ ] Refactor some parts of the code, to make it more clean to read.<br>
 - [x] Exceptions Handling
