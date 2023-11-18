@@ -6,6 +6,7 @@ import com.guiprojects.academy.entities.GymMembership;
 //Contain only informations necessary for Registration
 public class GymMembershipDTORegistration {
 
+	private Long id;
 	private String name;
 	private String cpf;
 	private String phone;
@@ -17,12 +18,22 @@ public class GymMembershipDTORegistration {
 		this.name = name;
 		this.cpf = cpf;
 		this.phone = phone;
+		this.id = id;
 	}
 	
 	public GymMembershipDTORegistration(GymMembership obj) {
 		this.name = obj.getName();
 		this.cpf = obj.getCpf();
 		this.phone = obj.getPhone();
+		this.id = obj.getId();
+	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {

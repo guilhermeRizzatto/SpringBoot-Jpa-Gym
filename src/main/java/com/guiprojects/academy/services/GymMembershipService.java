@@ -3,10 +3,13 @@ package com.guiprojects.academy.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.guiprojects.academy.entities.GymMembership;
 import com.guiprojects.academy.repositories.GymMembershipRepository;
+import com.guiprojects.academy.services.exceptions.DataBaseException;
+import com.guiprojects.academy.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class GymMembershipService {
@@ -20,16 +23,16 @@ public class GymMembershipService {
 	
 	public GymMembership findById(Long id) {	
 		Optional<GymMembership> obj = membershipRepository.findById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
 	public GymMembership findFullById(Long id) {
 		Optional<GymMembership> obj = membershipRepository.findFullById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
 	public GymMembership update(Long id, GymMembership objWithNewParameters) {
-		GymMembership memberToUpdate = membershipRepository.findById(id).get();
+		GymMembership memberToUpdate = membershipRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
 		
 		if(objWithNewParameters.getName() != null) memberToUpdate.setName(objWithNewParameters.getName());
 		if(objWithNewParameters.getAge() != null) memberToUpdate.setAge(objWithNewParameters.getAge());
@@ -41,7 +44,13 @@ public class GymMembershipService {
 	}
 	
 	public void delete(Long id) {
-		membershipRepository.deleteById(id);
+		try {
+			if(membershipRepository.existsById(id)) {
+				membershipRepository.deleteById(id);			
+			} else throw new ResourceNotFoundException(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new DataBaseException(e.getMessage());
+		}
 	}
 	
 	
