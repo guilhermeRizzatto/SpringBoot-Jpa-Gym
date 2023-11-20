@@ -1,14 +1,12 @@
 package com.guiprojects.academy.repositories;
 
-import java.util.Optional;
-
+import com.guiprojects.academy.entities.GymMembership;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-import com.guiprojects.academy.entities.GymMembership;
-
-import jakarta.transaction.Transactional;
+import java.util.Optional;
 
 public interface GymMembershipRepository extends JpaRepository<GymMembership, Long> {
 
@@ -31,8 +29,8 @@ public interface GymMembershipRepository extends JpaRepository<GymMembership, Lo
 	public void updateWorkout(Long workoutId, Long memberId);
 	
 	@Query("SELECT obj FROM GymMembership obj "
-			+ "JOIN FETCH obj.workout AS w "
-			+ "JOIN FETCH w.exercises "
+			+ "LEFT JOIN FETCH obj.workout AS w "
+			+ "LEFT JOIN FETCH w.exercises "
 			+ "WHERE obj.id = ?1")
 	public Optional<GymMembership> findFullById(Long id);
 	
