@@ -2,7 +2,9 @@ package com.guiprojects.academy.services;
 
 import java.util.Optional;
 
+import com.guiprojects.academy.services.exceptions.DataBaseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.guiprojects.academy.entities.Registration;
@@ -25,9 +27,13 @@ public class RegistrationService {
 	}
 	
 	public Registration insert (Registration registration) {
-		Registration obj = registrationRepository.save(registration);	
-		memberRepository.updateRegistration(obj.getId(), obj.getGymMembership().getId());
-		return obj;	
+		try {
+			Registration obj = registrationRepository.save(registration);
+			memberRepository.updateRegistration(obj.getId(), obj.getGymMembership().getId());
+			return obj;
+		} catch (DataIntegrityViolationException e){
+			throw new DataBaseException(e.getMessage());
+		}
 	}
 	
 	public Registration update(Long id, Registration objWithNewParameters) {
