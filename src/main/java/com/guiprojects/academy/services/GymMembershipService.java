@@ -1,15 +1,15 @@
 package com.guiprojects.academy.services;
 
-import java.util.Optional;
-
+import com.guiprojects.academy.entities.GymMembership;
+import com.guiprojects.academy.repositories.GymMembershipRepository;
+import com.guiprojects.academy.services.exceptions.DataBaseException;
+import com.guiprojects.academy.services.exceptions.GymMembershipException;
+import com.guiprojects.academy.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import com.guiprojects.academy.entities.GymMembership;
-import com.guiprojects.academy.repositories.GymMembershipRepository;
-import com.guiprojects.academy.services.exceptions.DataBaseException;
-import com.guiprojects.academy.services.exceptions.ResourceNotFoundException;
+import java.util.Optional;
 
 @Service
 public class GymMembershipService {
@@ -18,7 +18,7 @@ public class GymMembershipService {
 	private GymMembershipRepository membershipRepository;
 	
 	public GymMembership insert (GymMembership member) {
-		return membershipRepository.save(member);
+			return membershipRepository.save(member);
 	}
 	
 	public GymMembership findById(Long id) {	
@@ -28,7 +28,9 @@ public class GymMembershipService {
 	
 	public GymMembership findFullById(Long id) {
 		Optional<GymMembership> obj = membershipRepository.findFullById(id);
-		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
+		GymMembership member = obj.orElseThrow(() -> new ResourceNotFoundException(id));
+		if(member.getWorkout() == null) throw new GymMembershipException("GymMembership workout is empty");
+		return member;
 	}
 	
 	public GymMembership update(Long id, GymMembership objWithNewParameters) {
