@@ -1,15 +1,13 @@
 package com.guiprojects.academy.services.exceptions;
 
-import java.time.Instant;
-
+import com.guiprojects.academy.controllers.exceptions.StandardError;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.guiprojects.academy.controllers.exceptions.StandardError;
-
-import jakarta.servlet.http.HttpServletRequest;
+import java.time.Instant;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {
@@ -37,7 +35,13 @@ public class ResourceExceptionHandler {
 		StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
 	}
-	
 
+	@ExceptionHandler(GymMembershipException.class)
+	public ResponseEntity<StandardError> gymMembershipError (GymMembershipException e, HttpServletRequest request){
+		String error = "GymMembership error";
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(status).body(err);
+	}
 
 }
