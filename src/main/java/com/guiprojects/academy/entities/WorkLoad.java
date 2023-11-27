@@ -1,25 +1,13 @@
 package com.guiprojects.academy.entities;
 
+import com.guiprojects.academy.dto.request.WorkLoadDTORequest;
+import com.guiprojects.academy.dto.response.WorkLoadDTOResponse;
+import com.guiprojects.academy.entities.enums.WeekDays;
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.time.LocalTime;
-import java.util.LinkedHashSet;
-import java.util.Objects;
-import java.util.Set;
-
-import com.guiprojects.academy.dto.request.WorkLoadDTORequest;
-import com.guiprojects.academy.entities.enums.WeekDays;
-
-import jakarta.persistence.CollectionTable;
-import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import java.util.*;
 
 @Entity
 public class WorkLoad implements Serializable{
@@ -139,8 +127,14 @@ public class WorkLoad implements Serializable{
 		days.clear();
 		return daysToRemoveInDB; 	
 	}
-	
-	
+
+	public static List<WorkLoadDTOResponse> listWorkLoad (List<WorkLoad> list){
+		List<WorkLoadDTOResponse> listDto = new ArrayList<>();
+		for(WorkLoad x : list){
+			listDto.add(new WorkLoadDTOResponse(x));
+		}
+		return listDto;
+	}
 	
 	
 	
