@@ -1,21 +1,13 @@
 package com.guiprojects.academy.entities;
 
-import java.io.Serializable;
-import java.util.LinkedHashSet;
-import java.util.Objects;
-import java.util.Set;
-
 import com.guiprojects.academy.dto.request.TrainerDTORequest;
+import com.guiprojects.academy.dto.response.TrainerDTOBaseResponse;
+import com.guiprojects.academy.dto.response.TrainerDTOResponse;
 import com.guiprojects.academy.dtoAuxiliary.WorkoutDTOTrainer;
+import jakarta.persistence.*;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import java.io.Serializable;
+import java.util.*;
 
 @Entity
 public class Trainer implements Serializable{
@@ -112,7 +104,21 @@ public class Trainer implements Serializable{
 		}
 		return workoutDTOs;
 	}
-	
-	
+
+	public static List<TrainerDTOBaseResponse> listTrainerDTOBase (List<Trainer> list){
+		List<TrainerDTOBaseResponse> listDto = new ArrayList<>();
+		for(Trainer x : list){
+			listDto.add(new TrainerDTOBaseResponse(x));
+		}
+		return listDto;
+	}
+
+	public static List<TrainerDTOResponse> listTrainerDTOFull (List<Trainer> list){
+		List<TrainerDTOResponse> listDto = new ArrayList<>();
+		for(Trainer x : list){
+			listDto.add(new TrainerDTOResponse(x));
+		}
+		return listDto;
+	}
 
 }
