@@ -1,10 +1,10 @@
 package com.guiprojects.academy.dto.response;
 
-import java.time.LocalDate;
-
 import com.guiprojects.academy.dtoAuxiliary.GymMembershipDTORegistration;
 import com.guiprojects.academy.entities.GymMembership;
 import com.guiprojects.academy.entities.Registration;
+
+import java.time.LocalDate;
 
 public class RegistrationDTOResponse {
 
@@ -95,7 +95,6 @@ public class RegistrationDTOResponse {
 		this.gymMembership = new GymMembershipDTORegistration(gymMembership);
 	}
 
-	
 	
 	
 	

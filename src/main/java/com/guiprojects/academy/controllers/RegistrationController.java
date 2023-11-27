@@ -1,20 +1,15 @@
 package com.guiprojects.academy.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.guiprojects.academy.dto.request.RegistrationDTORequest;
 import com.guiprojects.academy.dto.response.RegistrationDTOResponse;
 import com.guiprojects.academy.entities.Registration;
 import com.guiprojects.academy.services.RegistrationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/registrations")
@@ -28,7 +23,13 @@ public class RegistrationController {
 		RegistrationDTOResponse registration = new RegistrationDTOResponse(registrationService.findById(id));
 		return ResponseEntity.ok().body(registration);
 	}
-	
+
+	@GetMapping
+	public ResponseEntity<List<RegistrationDTOResponse>> findAll() {
+		List<RegistrationDTOResponse> obj = Registration.listRegistration(registrationService.findAll());
+		return ResponseEntity.ok().body(obj);
+	}
+
 	@PostMapping
 	public ResponseEntity<RegistrationDTOResponse> insert(@RequestBody RegistrationDTORequest registration){
 		Registration obj = new Registration(registration);
