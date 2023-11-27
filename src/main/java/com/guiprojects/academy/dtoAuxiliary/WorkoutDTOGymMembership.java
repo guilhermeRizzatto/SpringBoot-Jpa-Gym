@@ -1,9 +1,9 @@
 package com.guiprojects.academy.dtoAuxiliary;
 
-import java.util.Set;
-
 import com.guiprojects.academy.dto.response.ExerciseDTOResponse;
 import com.guiprojects.academy.entities.Workout;
+
+import java.util.Set;
 
 //Only use in the GymMembershipDTOResponse
 //Contain only informations necessary for GymMembership
@@ -31,7 +31,7 @@ public class WorkoutDTOGymMembership {
 		this.description = obj.getDescription();
 		this.trainer = new TrainerDTO(obj.getTrainer());
 		this.exercises = ExerciseDTOResponse.createExercises(obj.getExercises());
-		obj.getId();
+		this.id = obj.getId();
 	}
 
 	public Long getId() {

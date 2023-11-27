@@ -1,16 +1,16 @@
 package com.guiprojects.academy.services;
 
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.stereotype.Service;
-
 import com.guiprojects.academy.entities.Workout;
 import com.guiprojects.academy.repositories.GymMembershipRepository;
 import com.guiprojects.academy.repositories.WorkoutRepository;
 import com.guiprojects.academy.services.exceptions.DataBaseException;
 import com.guiprojects.academy.services.exceptions.ResourceNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class WorkoutService {
@@ -29,6 +29,10 @@ public class WorkoutService {
 	public Workout findBaseById (Long id) {
 		Optional<Workout> obj = workoutRepository.findWorkoutBaseById(id);
 		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
+	}
+
+	public List<Workout> findAll() {
+		return workoutRepository.findAllWorkoutFull();
 	}
 	
 	public Workout insert (Workout workout) {
