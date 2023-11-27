@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface GymMembershipRepository extends JpaRepository<GymMembership, Long> {
@@ -33,6 +34,11 @@ public interface GymMembershipRepository extends JpaRepository<GymMembership, Lo
 			+ "LEFT JOIN FETCH w.exercises "
 			+ "WHERE obj.id = ?1")
 	public Optional<GymMembership> findFullById(Long id);
+
+	@Query("SELECT obj FROM GymMembership obj "
+			+ "LEFT JOIN FETCH obj.workout AS w "
+			+ "LEFT JOIN FETCH w.exercises ")
+	public List<GymMembership> findAllFull();
 	
 	@Transactional
 	@Modifying

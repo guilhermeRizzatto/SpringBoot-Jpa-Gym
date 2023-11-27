@@ -1,17 +1,14 @@
 package com.guiprojects.academy.entities;
 
-import java.io.Serializable;
-import java.util.Objects;
-
 import com.guiprojects.academy.dto.request.GymMembershipDTORequest;
+import com.guiprojects.academy.dto.response.GymMembershipDTOBaseResponse;
+import com.guiprojects.academy.dto.response.GymMembershipDTOResponse;
+import jakarta.persistence.*;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class GymMembership implements Serializable{
@@ -148,7 +145,21 @@ public class GymMembership implements Serializable{
 		GymMembership other = (GymMembership) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
+
+	public static List<GymMembershipDTOBaseResponse> listMembersDTOBase(List<GymMembership> list){
+		List<GymMembershipDTOBaseResponse> listDto = new ArrayList<>();
+		for(GymMembership x : list){
+			listDto.add(new GymMembershipDTOBaseResponse(x));
+		}
+		return listDto;
+	}
+
+	public static List<GymMembershipDTOResponse> listMembersDTOFull(List<GymMembership> list){
+		List<GymMembershipDTOResponse> listDto = new ArrayList<>();
+		for(GymMembership x : list){
+			listDto.add(new GymMembershipDTOResponse(x));
+		}
+		return listDto;
+	}
 
 }
