@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,12 +21,26 @@ public class GymMembershipService {
 	public GymMembership insert (GymMembership member) {
 			return membershipRepository.save(member);
 	}
-	
-	public GymMembership findById(Long id) {	
+
+	public GymMembership findById(Long id) {
 		Optional<GymMembership> obj = membershipRepository.findById(id);
 		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
-	
+
+	public List<GymMembership> findAll(){
+		return membershipRepository.findAll();
+	}
+
+	public List<GymMembership> findAllWithWorkout(){
+		List<GymMembership> list = membershipRepository.findAllFull();
+		for(GymMembership x : list) {
+			if (x.getWorkout() == null) {
+				throw new GymMembershipException("GymMembership id: " + x.getId() + " has workout empty");
+			}
+		}
+		return list;
+	}
+
 	public GymMembership findFullById(Long id) {
 		Optional<GymMembership> obj = membershipRepository.findFullById(id);
 		GymMembership member = obj.orElseThrow(() -> new ResourceNotFoundException(id));

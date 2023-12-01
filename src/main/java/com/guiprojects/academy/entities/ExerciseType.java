@@ -1,14 +1,16 @@
 package com.guiprojects.academy.entities;
 
-import java.io.Serializable;
-import java.util.Objects;
-
-import com.guiprojects.academy.dto.request.ExerciseTypeDTORequest;
-
+ import com.guiprojects.academy.dto.request.ExerciseTypeDTORequest;
+import com.guiprojects.academy.dto.response.ExerciseTypeDTOResponse;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class ExerciseType implements Serializable{
@@ -78,6 +80,12 @@ public class ExerciseType implements Serializable{
 		return Objects.equals(id, other.id);
 	}
 
-	
+	public static List<ExerciseTypeDTOResponse> listExerciseType(List<ExerciseType> list){
+		List<ExerciseTypeDTOResponse> listDto = new ArrayList<>();
+		for(ExerciseType x : list){
+			listDto.add(new ExerciseTypeDTOResponse(x));
+		}
+		return listDto;
+	}
 	
 }

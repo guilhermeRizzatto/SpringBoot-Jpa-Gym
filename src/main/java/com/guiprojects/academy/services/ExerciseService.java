@@ -1,15 +1,14 @@
 package com.guiprojects.academy.services;
 
-import java.util.Set;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.stereotype.Service;
-
 import com.guiprojects.academy.entities.Exercise;
 import com.guiprojects.academy.repositories.ExerciseRepository;
 import com.guiprojects.academy.services.exceptions.DataBaseException;
 import com.guiprojects.academy.services.exceptions.ResourceNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 @Service
 public class ExerciseService {
@@ -18,8 +17,7 @@ public class ExerciseService {
 	private ExerciseRepository exerciseRepository;
 	
 	public Set<Exercise> findByWorkoutId (Long workoutId) {
-		Set<Exercise> obj = exerciseRepository.findByWorkoutId(workoutId);
-		return obj;
+		return exerciseRepository.findByWorkoutId(workoutId);
 	}
 	
 	public Exercise insert (Exercise exercise) {

@@ -1,16 +1,16 @@
 package com.guiprojects.academy.services;
 
-import java.util.Optional;
-
+import com.guiprojects.academy.entities.Registration;
+import com.guiprojects.academy.repositories.GymMembershipRepository;
+import com.guiprojects.academy.repositories.RegistrationRepository;
 import com.guiprojects.academy.services.exceptions.DataBaseException;
+import com.guiprojects.academy.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import com.guiprojects.academy.entities.Registration;
-import com.guiprojects.academy.repositories.GymMembershipRepository;
-import com.guiprojects.academy.repositories.RegistrationRepository;
-import com.guiprojects.academy.services.exceptions.ResourceNotFoundException;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RegistrationService {
@@ -24,6 +24,10 @@ public class RegistrationService {
 	public Registration findById(Long id) {
 		Optional<Registration> obj = registrationRepository.findById(id);
 		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
+	}
+
+	public List<Registration> findAll() {
+		return registrationRepository.findAll();
 	}
 	
 	public Registration insert (Registration registration) {

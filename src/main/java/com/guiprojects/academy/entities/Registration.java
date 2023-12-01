@@ -1,17 +1,14 @@
 package com.guiprojects.academy.entities;
 
+import com.guiprojects.academy.dto.request.RegistrationDTORequest;
+import com.guiprojects.academy.dto.response.RegistrationDTOResponse;
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-
-import com.guiprojects.academy.dto.request.RegistrationDTORequest;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 
 @Entity
 public class Registration implements Serializable{
@@ -141,7 +138,7 @@ public class Registration implements Serializable{
 		LocalDate now = LocalDate.now();
 		LocalDate expiryDate = registrationDate.plusMonths(monthlyPeriod.longValue());
 		
-		return expiryDate.isAfter(now) == true || expiryDate.isEqual(now) == true;
+		return expiryDate.isAfter(now) || expiryDate.isEqual(now);
 	}
 	
 	//constructor auxiliary, only used for Patch Method in RegistrationsController to evite conflicts with isValid()
@@ -157,7 +154,14 @@ public class Registration implements Serializable{
 		
 		return obj;
 	}
-	
+
+	public static List<RegistrationDTOResponse> listRegistration (List<Registration> list){
+		List<RegistrationDTOResponse> listDto = new ArrayList<>();
+		for(Registration x : list){
+			listDto.add(new RegistrationDTOResponse(x));
+		}
+		return listDto;
+	}
 	
 
 }

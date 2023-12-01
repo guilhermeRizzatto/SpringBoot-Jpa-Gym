@@ -1,13 +1,13 @@
 package com.guiprojects.academy.services;
 
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.guiprojects.academy.entities.ExerciseType;
 import com.guiprojects.academy.repositories.ExerciseTypeRepository;
 import com.guiprojects.academy.services.exceptions.ResourceNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ExerciseTypeService {
@@ -19,7 +19,12 @@ public class ExerciseTypeService {
 		Optional<ExerciseType> obj = exerciseTypeRepository.findById(id);
 		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
-	
+
+	public List<ExerciseType> findAll(){
+		return exerciseTypeRepository.findAll();
+	}
+
+
 	public ExerciseType insert (ExerciseType exerciseType) {
 		return exerciseTypeRepository.save(exerciseType);
 	}

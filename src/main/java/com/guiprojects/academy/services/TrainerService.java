@@ -1,16 +1,16 @@
 package com.guiprojects.academy.services;
 
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.stereotype.Service;
-
 import com.guiprojects.academy.entities.Trainer;
 import com.guiprojects.academy.repositories.TrainerRepository;
 import com.guiprojects.academy.services.exceptions.DataBaseException;
 import com.guiprojects.academy.services.exceptions.ResourceNotFoundException;
 import com.guiprojects.academy.services.exceptions.TrainerWorkLoadException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TrainerService {
@@ -23,7 +23,21 @@ public class TrainerService {
 		Optional<Trainer> obj = trainerRepository.findById(id);
 		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
-	
+
+	public List<Trainer> findAll() {
+		return trainerRepository.findAll();
+	}
+
+	public List<Trainer> findAllFull() {
+		List<Trainer> list = trainerRepository.findFullAll();
+		for(Trainer x : list) {
+			if (x.getWorkLoad() == null) {
+				throw new TrainerWorkLoadException("Trainer id: " + x.getId() + " has workLoad empty");
+			}
+		}
+		return list;
+	}
+
 	public Trainer findFullById (Long id) {
 		Optional<Trainer> obj = trainerRepository.findFullById(id);
 		Trainer trainer = obj.orElseThrow(() -> new ResourceNotFoundException(id));

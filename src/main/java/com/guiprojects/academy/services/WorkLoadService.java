@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -25,6 +26,10 @@ public class WorkLoadService {
 	public WorkLoad findById (Long id) {
 		Optional<WorkLoad> obj = workLoadRepository.findWorkLoadById(id);
 		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
+	}
+
+	public List<WorkLoad> findAll() {
+		return workLoadRepository.findAllWorkLoad();
 	}
 	
 	public WorkLoad insert (WorkLoad workLoad) {
@@ -43,11 +48,10 @@ public class WorkLoadService {
 		if(objWithNewParameters.getEntryTime() != null) workLoadToUpdate.setEntryTime(objWithNewParameters.getEntryTime());
 		if(objWithNewParameters.getDepartureTime() != null) workLoadToUpdate.setDepartureTime(objWithNewParameters.getDepartureTime());
 		
-		if(objWithNewParameters.getDays() != null) {			
+		if(objWithNewParameters.getDays() != null) {
 			deleteDaysInDB(workLoadToUpdate.deleteDays(objWithNewParameters.getDays()));
 			workLoadToUpdate.addDays(objWithNewParameters.getDays());
 		}
-		
 		return workLoadRepository.save(workLoadToUpdate);	
 	}
 	

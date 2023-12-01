@@ -1,23 +1,13 @@
 package com.guiprojects.academy.entities;
 
-import java.io.Serializable;
-import java.util.LinkedHashSet;
-import java.util.Objects;
-import java.util.Set;
-
 import com.guiprojects.academy.dto.request.WorkoutDTORequestPOST;
 import com.guiprojects.academy.dto.response.ExerciseDTOResponse;
+import com.guiprojects.academy.dto.response.WorkoutDTOResponseBASE;
+import com.guiprojects.academy.dto.response.WorkoutDTOResponseFULL;
+import jakarta.persistence.*;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import java.io.Serializable;
+import java.util.*;
 
 @Entity
 public class Workout implements Serializable{
@@ -94,15 +84,6 @@ public class Workout implements Serializable{
 		return exercises;
 	}
 	
-	public Set<ExerciseDTOResponse> returnExerciseDTO(Set<Exercise> exercises){
-		Set<ExerciseDTOResponse> exercisesDTO = new LinkedHashSet<>();
-		for(Exercise x : exercises) {
-			ExerciseDTOResponse dto = new ExerciseDTOResponse(x);
-			exercisesDTO.add(dto);
-		}
-		return exercisesDTO;
-	}
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -119,10 +100,30 @@ public class Workout implements Serializable{
 		Workout other = (Workout) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
-	
-	
+	public Set<ExerciseDTOResponse> returnExerciseDTO(Set<Exercise> exercises){
+		Set<ExerciseDTOResponse> exercisesDTO = new LinkedHashSet<>();
+		for(Exercise x : exercises) {
+			ExerciseDTOResponse dto = new ExerciseDTOResponse(x);
+			exercisesDTO.add(dto);
+		}
+		return exercisesDTO;
+	}
+
+	public static List<WorkoutDTOResponseBASE> listWorkoutDTOBase (List<Workout> list){
+		List<WorkoutDTOResponseBASE> listDto = new ArrayList<>();
+		for(Workout x : list){
+			listDto.add(new WorkoutDTOResponseBASE(x));
+		}
+		return listDto;
+	}
+
+	public static List<WorkoutDTOResponseFULL> listWorkoutDTOFull (List<Workout> list){
+		List<WorkoutDTOResponseFULL> listDto = new ArrayList<>();
+		for(Workout x : list){
+			listDto.add(new WorkoutDTOResponseFULL(x));
+		}
+		return listDto;
+	}
 	
 	
 

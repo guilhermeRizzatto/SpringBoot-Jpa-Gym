@@ -1,22 +1,16 @@
 package com.guiprojects.academy.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.guiprojects.academy.dto.request.WorkoutDTORequestPOST;
 import com.guiprojects.academy.dto.response.WorkoutDTOResponseBASE;
 import com.guiprojects.academy.dto.response.WorkoutDTOResponseFULL;
 import com.guiprojects.academy.entities.Workout;
 import com.guiprojects.academy.services.WorkoutService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/workouts")
@@ -35,6 +29,18 @@ public class WorkoutController {
 	public ResponseEntity<WorkoutDTOResponseFULL> findByIdFull(@PathVariable Long id){
 		WorkoutDTOResponseFULL obj = new WorkoutDTOResponseFULL(workoutService.findFullById(id));
 		return ResponseEntity.status(HttpStatus.OK).body(obj);
+	}
+
+	@GetMapping
+	public ResponseEntity<List<WorkoutDTOResponseBASE>> findAllBase() {
+		List<WorkoutDTOResponseBASE> obj = Workout.listWorkoutDTOBase(workoutService.findAll());
+		return ResponseEntity.ok().body(obj);
+	}
+
+	@GetMapping(value = "/full")
+	public ResponseEntity<List<WorkoutDTOResponseFULL>> findAllFull() {
+		List<WorkoutDTOResponseFULL> obj = Workout.listWorkoutDTOFull(workoutService.findAll());
+		return ResponseEntity.ok().body(obj);
 	}
 	
 	
