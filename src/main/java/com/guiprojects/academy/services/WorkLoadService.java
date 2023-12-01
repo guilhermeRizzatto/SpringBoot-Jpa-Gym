@@ -48,11 +48,10 @@ public class WorkLoadService {
 		if(objWithNewParameters.getEntryTime() != null) workLoadToUpdate.setEntryTime(objWithNewParameters.getEntryTime());
 		if(objWithNewParameters.getDepartureTime() != null) workLoadToUpdate.setDepartureTime(objWithNewParameters.getDepartureTime());
 		
-		if(objWithNewParameters.getDays() != null) {			
+		if(objWithNewParameters.getDays() != null) {
 			deleteDaysInDB(workLoadToUpdate.deleteDays(objWithNewParameters.getDays()));
 			workLoadToUpdate.addDays(objWithNewParameters.getDays());
 		}
-		
 		return workLoadRepository.save(workLoadToUpdate);	
 	}
 	
