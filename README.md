@@ -11,16 +11,313 @@ And there exists a *Workout* that connects them (*GymMembership* and the *traine
 All the Classes you can **ADD, GET, UPDATE, and DELETE**, less the *Registration* and *WorkLoad* which are deleted together with *GymMembership(to Registration)* or *Trainer(to WorkLoad)*.
 
 **UPDATES I WANT TO DO IN THIS PROGRAM:<br>**
-- [ ] Implements GET ALL in all Classes with a Pagination system.<br>
-- [ ] Deploy the DataBase in Cloud<br>
-- [ ] Deploy the program in any cloud system, for example AWS.<br>
+- [x] Implements GET ALL in all Classes with a Pagination system.<br>
+- [x] Deploy the DataBase in Cloud<br>
+- [x] Deploy the program in any cloud system, for example AWS.<br>
 - [ ] Refactor some parts of the code, to make it more clean to read.<br>
 - [x] Exceptions Handling
+- [ ] Make the documentation in Swagger
 
 **CHALLENGINGS I HAVE FOUNDED DURING DEVELOPMENT:<br>**
 * I used the option: jpa-open-in-view = false, this made my development very hard to get the entities with your association, and the way I decided to solve this, is to make **JPQL** and **Native SQL** queries in each Classes Repositories. It is not the best and prettiest code to read, but it works and I want to improve this code in the future.<br>
-* Made a DataBase in a Virtual Machine (Oracle Linux) and connect the program because don't they teach us how to connect in a database that is not on your localHost.I never do it before, so it was challenging for me.<br>
-* Making the diagram of the Classes,is difficult but I learned a lot from it, because it makes me think more about in program structure and how the classes would connect.<br>
+* Made a DataBase in a Virtual Machine (Oracle Linux) and connect the program because most courses don't teach us how to connect to a database that is not on your localHost.I had never done it before, so it was challenging for me.<br>
+* Making the diagram of the Classes, is difficult but I learned a lot from it because it makes me think more about the program structure and how the classes would connect.<be>
+
+
+**How to use**
+* You need to have postman or some other api client
+* Use the addres **`api.academyservice.com.br:8080`**
+
+### METHODS AND YOUR RESPONSES (click in "Methods Documentation") ↴
+<details>
+  <summary>Methods Documentation</summary>
+  
+  ### GET ALL GymMembership
+  ```http
+  GET /gymMembers
+  ```
+
+  ### GET GymMembership By Id
+  ```http
+  GET /gymMembers/{id} (id basically is a number, example: 7 , so /gymMembers/7)
+  ```
+
+  ### RESPONSE GET ALL and GET BY ID GymMembership
+  ```javascript
+  {
+    "id" : long,
+    "name" : string,
+    "phone" : string
+    "age" : int
+    "weight" : double
+    "height" : double
+  }
+  ```
+
+  ### So, basically that's it, for GET ALL or GET BY ID for GymMembership,Registratition,WorkLoad, ExerciseType use this:
+  ```http
+  GET /{entitie}
+  ```
+   ```http
+  GET /{entitie}/{id}
+  ```
+
+  ### GET GymMembership with your Workout:
+  ```http
+  GET /gymMembers/withWorkout
+  ```
+  ```http
+  GET /gymMembers/withWorkout/{id}
+  ```
+
+
+<details>
+  <summary>Trainer</summary>
+  
+  ### GET Trainer
+  ```http
+  GET /trainers/
+  ```
+  ```http
+  GET /trainers/base/{id}
+  ```
+  **Response**
+  ```javascript
+  {
+    "id": long,
+    "name": string,
+    "email": string
+  }
+  ```
+  
+  ### GET Trainer with your WorkLoad and Workout
+  ```http
+  GET /trainers/full
+  ```
+  ```http
+  GET /trainers/full/{id}
+  ```
+  **Response**
+  ```javascript
+  {
+    "id": long,
+    "name": string,
+    "email": string,
+    "workLoad": {
+        "id": long,
+        "entryTime": time (example: 11:00:00),
+        "departureTime": time,
+        "days": [
+            WeekDays Enums
+        ]
+    }
+    "workouts": [
+        {
+            "id": long,
+            "description": string,
+            "gymMembership": {
+                "id": long,
+                "name": string,
+                "phone": string,
+                "age": int,
+                "weight": double,
+                "height": double
+            }
+        }]
+  }
+  ```
+  ```http
+  POST /trainers
+  ```
+  To post send this json: 
+  
+  ```javascript
+  {
+    "name": string,
+    "email": string
+  }
+  ```
+  
+  ```http
+  PATCH /trainers/patch/{id}
+  ```
+  To patch send a json with the part which you want to update
+  
+  ```http
+  DELETE /trainers/delete/{id}
+  ```
+
+
+</details>
+
+
+  <details>
+    <summary>Workout</summary>
+    
+  ### GET Workout
+  ```http
+  GET /workouts/
+  ```
+  ```http
+  GET /workouts/base/{id}
+  ```
+  **Response**
+  ```javascript
+    {
+        "id": long,
+        "description": string,
+        "gymMembership": {
+            "id": long,
+            "name": string,
+            "phone": string,
+            "age": int,
+            "weight": double,
+            "height": double
+        },
+        "trainer": {
+            "id": long,
+            "name": string,
+            "email": string
+        }
+    }
+  ```
+  ### GET Workout with your GymMembership, Trainer and Exercises
+  ```http
+  GET /workouts/full/
+  ```
+  ```http
+  GET /workouts/full/{id}
+  ```
+   **Response**
+  ```javascript
+    {
+        "id": long,
+        "description": string,
+        "gymMembership": {
+            "id": long,
+            "name": string,
+            "phone": string,
+            "age": int,
+            "weight": double,
+            "height": double
+        },
+        "trainer": {
+            "id": long,
+            "name": string,
+            "email": string
+        },
+        "exercises": [
+            {
+                "exerciseType": {
+                    "id": long,
+                    "name": string,
+                    "muscleGroup": string
+                },
+                "sets": int,
+                "reps": int,
+                "intervalSeconds": int
+            }
+        ]
+    }
+  ```
+
+  ```http
+  POST /workouts
+  ```
+
+  To post send this json: 
+  
+  ```javascript
+  {
+	"description" : string,
+	"gymMembership" : {
+        "id" : long
+    },
+	"trainer" : {
+        "id" : long
+    }
+  }
+  ```
+
+  ```http
+  PATCH /workouts/patch/{id}
+  ```
+  To patch send a json with the part which you want to update
+  
+  ```http
+  DELETE /workouts/delete/{id}
+  ```
+  </details>
+
+
+  <details>
+    <summary>Exercise</summary>
+    
+  ```http
+  GET /exercises/byWorkout/{workoutId} (you can only get all the exercises that are in this workout, because they are linked to the workout that has them)
+  ```
+
+  **Response**
+  ```javascript
+  [
+    {
+        "exerciseType": {
+            "id": long,
+            "name": string,
+            "muscleGroup": string
+        },
+        "sets": int,
+        "reps": int,
+        "intervalSeconds": int
+    }
+  ]
+  ```
+
+  ```http
+  POST /exercises
+  ```
+
+  To post send this json: 
+  
+  ```javascript
+  {
+    "exerciseType" : {
+        "id" : long
+    },
+    "workout" : {
+        "id" : long
+    },
+    "sets" : int,
+    "reps" : int,
+    "intervalSeconds" : int
+  }
+  ```
+  ```http
+  PATCH /exercises/patch/workout/{workoutId}/exerciseType/{exerciseTypeId}
+  ```
+  To patch send a json with the part which you want to update, example:
+  ```javascript
+  {
+    "sets" : 3,
+    "reps" : 8
+  }
+  ```
+  
+  ```http
+  DELETE /exercises/delete/workout/{workoutId}/exerciseType/{exerciseTypeId}
+  ```
+  </details>
+
+
+
+</details>
+
+
+
+
+
+
+
 -------------------------------------------------------------------
 
 Follow the diagram of the classes below:
@@ -36,6 +333,7 @@ Follow the diagram of the classes below:
 <p>Postgres SQL</p>
 <p>ORACLE Linux (used to host the test database)</p>
 <p>SupaBase to host Postgres Database</p>
+<p>AWS to deploy</p>
 ------------------------------------------------------------------- <br>
 <p>🔧 Tools used: </p>
 <p>Spring Tool Suite 4</p>
