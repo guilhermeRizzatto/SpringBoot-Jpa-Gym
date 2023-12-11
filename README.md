@@ -25,24 +25,37 @@ All the Classes you can **ADD, GET, UPDATE, and DELETE**, less the *Registration
 
 
 **How to use**
-* You need to have postman or some other api client
-* Use the addres **`api.academyservice.com.br:8080`**
+* You need to have Postman or some other API client
+* Use the address **`api.academyservice.com.br:8080`**
 
-### METHODS AND YOUR RESPONSES (click in "Methods Documentation") ↴
+### METHODS AND YOUR RESPONSES (click on "Methods Documentation") ↴
 <details>
   <summary>Methods Documentation</summary>
-  
-  ### GET ALL GymMembership
+<br>
+				
+**IMPORTANT** <br>
+`To post Registration, first need to post GymMembership, the same to WorkLoad and Trainer, and Workout needs to have GymMembership and Trainer already posted
+Exercise needs ExerciseType and Workout posted first also`
+
+***PLEASE DO NOT POST ANY ENTITIES WITH ANY PARAMETERS EMPTY, THIS WILL BREAK SOME METHODS*** 
+
+To delete GymMembership, deletes your Workout associated
+<br>
+
+-----------------------------------------------------------------------------------------------------------
+<details>
+	<summary>GymMembership</summary>
+	
+### GET GymMembership
   ```http
   GET /gymMembers
   ```
-
-  ### GET GymMembership By Id
   ```http
   GET /gymMembers/{id} (id basically is a number, example: 7 , so /gymMembers/7)
   ```
 
-  ### RESPONSE GET ALL and GET BY ID GymMembership
+
+  **Response**
   ```javascript
   {
     "id" : long,
@@ -54,21 +67,187 @@ All the Classes you can **ADD, GET, UPDATE, and DELETE**, less the *Registration
   }
   ```
 
-  ### So, basically that's it, for GET ALL or GET BY ID for GymMembership,Registratition,WorkLoad, ExerciseType use this:
-  ```http
-  GET /{entitie}
-  ```
-   ```http
-  GET /{entitie}/{id}
-  ```
-
-  ### GET GymMembership with your Workout:
+ ### GET GymMembership with your Workout:
   ```http
   GET /gymMembers/withWorkout
   ```
   ```http
   GET /gymMembers/withWorkout/{id}
   ```
+
+**Response**
+```javascript
+  {
+    "id" : long,
+    "name" : string,
+    "phone" : string
+    "age" : int
+    "weight" : double
+    "height" : double
+    "workout": {
+        "id": long,
+        "description": string,
+        "trainer": {
+            "id": long,
+            "name": string,
+            "email": string
+        },
+        "exercises": [
+            {
+                "exerciseType": {
+                    "id": long,
+                    "name": string,
+                    "muscleGroup": string
+                },
+                "sets": int,
+                "reps": int,
+                "intervalSeconds": int
+            }
+	]
+    }
+  }
+  ```
+
+  ```http
+  POST /gymMembers
+  ```
+  To post send this json: 
+  
+  ```javascript
+  {
+    "name" : string,
+    "cpf" : string,
+    "phone" : string,
+    "age" : int,
+    "weight" : double,
+    "height" : double
+  }
+  ```
+  ```http
+  PATCH /gymMembers/patch/{id}
+  ```
+  To patch send a json with the part which you want to update
+
+  ```http
+  DELETE /gymMembers/delete/{id}
+  ```
+
+  
+ 
+</details>
+
+<details>
+	<summary>Registration</summary>
+	
+### GET Registration
+
+  ```http
+  GET /registrations/
+  ```
+  ```http
+  GET /registrations/{id}
+  ```
+ **Response**
+  ```javascript
+  {
+    "id": long,
+    "registrationDate": date (example: "2023-07-19"),
+    "monthlyPeriod": int,
+    "price": double,
+    "installment": int,
+    "valid": boolean,
+    "installmentPrice": double,
+    "gymMembership": {
+        "id": long,
+        "name": string,
+        "cpf": string,
+        "phone": string
+    }
+  }
+  ```
+  ```http
+  POST /registrations
+  ```
+  To post send this json: 
+  
+  ```javascript
+  {   
+    "registrationDate" : dateTime (example: "2023-12-22T10:56:57"),
+    "monthlyPeriod" : int,
+    "price" : double,
+    "installment" : int,
+    "gymMembership" : {
+        "id" : long
+    }
+  }
+  ```
+  ```http
+  PATCH /registrations/patch/{id}
+  ```
+  To patch send a json with the part which you want to update
+
+ `When you delete a GymMembership, your Registration associated deletes together`
+
+
+</details>
+
+
+<details>
+	<summary>WorkLoad</summary>
+
+### GET WorkLoad
+  ```http
+  GET /workLoads/
+  ```
+  ```http
+  GET /workLoads/{id}
+  ```
+  **Response**
+  ```javascript
+  {
+    "id": long,
+    "entryTime": time (example: 11:00:00),
+    "departureTime": time,
+    "trainer": {
+        "id": long,
+        "name": string,
+        "email": string
+    },
+    "days": [
+	WeekDays Enums (example:)
+        "MONDAY",
+        "SUNDAY",
+        "THURSDAY"
+    ]
+  }
+  ```
+  ```http
+  POST /workLoads
+  ```
+  To post send this json: 
+  
+  ```javascript
+  {
+   
+    "entryTime" : time (example: 11:00:00),
+    "departureTime" : time,
+    "trainer" : {
+        "id" : long
+    },
+    "days" : [
+        WeekDays Enums
+    ]
+}
+  ```
+  ```http
+  PATCH /workLoads/patch/{id}
+  ```
+  To patch send a json with the part which you want to update
+
+ `When you delete a Trainer, your WorkLoad associated deletes together`
+
+ 
+</details>
 
 
 <details>
@@ -307,6 +486,48 @@ All the Classes you can **ADD, GET, UPDATE, and DELETE**, less the *Registration
   DELETE /exercises/delete/workout/{workoutId}/exerciseType/{exerciseTypeId}
   ```
   </details>
+
+<details>
+<summary>ExerciseType</summary>
+	
+### GET ExerciseType
+  ```http
+  GET /exerciseTypes/
+  ```
+  ```http
+  GET /exerciseTypes/{id}
+  ```
+  **Response**
+  ```javascript
+  {
+    "id": long,
+    "name": string,
+    "muscleGroup": string
+  }
+  ```
+  ```http
+  POST /exerciseTypes
+  ```
+  To post send this json: 
+  
+  ```javascript
+  {
+    "name": string,
+    "muscleGroup": string
+  }
+  ```
+
+  ```http
+  PATCH /exerciseTypes/patch/{id}
+  ```
+  To patch send a json with the part which you want to update
+  
+  ```http
+  DELETE /exerciseTypes/delete/{id}
+  ```
+</details>
+
+
 
 
 
