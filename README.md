@@ -24,9 +24,9 @@ All the Classes you can **ADD, GET, UPDATE, and DELETE**, less the *Registration
 * Making the diagram of the Classes, is difficult but I learned a lot from it because it makes me think more about the program structure and how the classes would connect.<be>
 
 
-**How to use**
-* You need to have Postman or some other API client
-* Use the address **`api.academyservice.com.br:8080`**
+**How to use:**
+<br>
+* unfortunately, it's not possible to use more, it was hosted on AWS, but they charged me. I don't want to spend money on hosting a testing project, sorry.
 
 ### METHODS AND YOUR RESPONSES (click on "Methods Documentation") ↴
 <details>
