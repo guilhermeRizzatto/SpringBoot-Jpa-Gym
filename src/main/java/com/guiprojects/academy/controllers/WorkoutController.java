@@ -43,6 +43,11 @@ public class WorkoutController {
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	@GetMapping(value = "/base/trainer/{trainerId}")
+	public ResponseEntity<List<WorkoutDTOResponseBASE>> findBaseByTrainerId(@PathVariable Long trainerId) {
+		List<WorkoutDTOResponseBASE> obj = Workout.listWorkoutDTOBase(workoutService.findBaseByTrainerId(trainerId));
+		return ResponseEntity.status(HttpStatus.OK).body(obj);
+	}
 	
 	@PostMapping
 	public ResponseEntity<WorkoutDTOResponseBASE> insert(@RequestBody WorkoutDTORequestPOST request){

@@ -26,7 +26,7 @@ public class RegistrationDTOResponse {
 		this.price = obj.getPrice();
 		this.installment = obj.getInstallment();
 		this.valid = obj.getValid();
-		this.installmentPrice = obj.getInstallmentPrice();
+		this.installmentPrice = formatInstallmentPrice(obj.getInstallmentPrice());
 		this.gymMembership = new GymMembershipDTORegistration(obj.getGymMembership());
 		this.id = obj.getId();
 	}
@@ -95,6 +95,9 @@ public class RegistrationDTOResponse {
 		this.gymMembership = new GymMembershipDTORegistration(gymMembership);
 	}
 
+	public double formatInstallmentPrice(Double installmentPrice) {
+		return Double.valueOf(String.format("%.2f", installmentPrice));
+	}
 	
 	
 	

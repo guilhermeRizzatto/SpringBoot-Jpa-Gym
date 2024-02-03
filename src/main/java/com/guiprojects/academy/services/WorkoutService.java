@@ -35,6 +35,10 @@ public class WorkoutService {
 		return workoutRepository.findAllWorkoutFull();
 	}
 	
+	public List<Workout> findBaseByTrainerId(Long trainerId){
+		return workoutRepository.findWorkoutBaseByTrainerId(trainerId);
+	}
+	
 	public Workout insert (Workout workout) {
 		try {
 		Workout obj = workoutRepository.save(workout);

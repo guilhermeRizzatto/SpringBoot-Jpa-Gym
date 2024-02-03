@@ -11,10 +11,10 @@ import java.util.Optional;
 
 public interface WorkLoadRepository extends JpaRepository<WorkLoad, Long>{
 
-	@Query("select obj FROM WorkLoad obj JOIN FETCH obj.days WHERE obj.id = ?1")
+	@Query("select obj FROM WorkLoad obj LEFT JOIN FETCH obj.days WHERE obj.id = ?1")
 	public Optional<WorkLoad> findWorkLoadById(Long id);
 
-	@Query("select obj FROM WorkLoad obj JOIN FETCH obj.days")
+	@Query("select obj FROM WorkLoad obj LEFT JOIN FETCH obj.days")
 	public List<WorkLoad> findAllWorkLoad();
 	
 	@Transactional

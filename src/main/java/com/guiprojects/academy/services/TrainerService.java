@@ -30,11 +30,11 @@ public class TrainerService {
 
 	public List<Trainer> findAllFull() {
 		List<Trainer> list = trainerRepository.findFullAll();
-		for(Trainer x : list) {
-			if (x.getWorkLoad() == null) {
-				throw new TrainerWorkLoadException("Trainer id: " + x.getId() + " has workLoad empty");
-			}
-		}
+		//for(Trainer x : list) {
+			//if (x.getWorkLoad() == null) {
+			//	throw new TrainerWorkLoadException("Trainer id: " + x.getId() + " has workLoad empty");
+			//}
+		//}
 		return list;
 	}
 

@@ -29,6 +29,7 @@ public class TrainerController {
 	@GetMapping(value = "/full/{id}")
 	public ResponseEntity<TrainerDTOResponse> findByIdFull(@PathVariable Long id){
 		TrainerDTOResponse obj = TrainerDTOResponse.createExercises(trainerService.findFullById(id));
+		System.out.println(obj.getWorkouts());
 		return ResponseEntity.ok().body(obj);
 	}
 

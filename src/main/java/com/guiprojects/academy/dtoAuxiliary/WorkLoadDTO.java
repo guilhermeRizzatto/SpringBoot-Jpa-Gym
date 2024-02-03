@@ -28,10 +28,17 @@ public class WorkLoadDTO {
 	}
 	
 	public WorkLoadDTO(WorkLoad obj) {
-		this.entryTime = obj.getEntryTime();
-		this.departureTime = obj.getDepartureTime();
-		this.days = obj.getDays();
-		this.id = obj.getId();
+		if(obj == null) {
+			this.entryTime = null;
+			this.departureTime = null;
+			this.days = null;
+			this.id = null;
+		} else {
+			this.entryTime = obj.getEntryTime();
+			this.departureTime = obj.getDepartureTime();
+			this.days = obj.getDays();
+			this.id = obj.getId();
+		}
 	}
 
 	public Long getId() {

@@ -17,4 +17,8 @@ public interface WorkoutRepository extends JpaRepository<Workout, Long>{
 
 	@Query("select obj FROM Workout obj LEFT JOIN FETCH obj.exercises")
 	public List<Workout> findAllWorkoutFull();
+	
+	
+	@Query("select obj FROM Workout obj WHERE obj.trainer.id = ?1")
+	public List<Workout> findWorkoutBaseByTrainerId(Long trainerId);
 }
